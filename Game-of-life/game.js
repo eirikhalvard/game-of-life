@@ -1,12 +1,14 @@
 let canvasWidth = 600;
 let canvasHeight = 600;
-let resolution = 6;
+let resolution = 20;
 let generation;
+let fps = 30;
 
 function setup() {
+  frameRate(fps);
   canvasWidth -= canvasWidth % resolution;
   canvasHeight -= canvasHeight % resolution;
-  createCanvas(canvasWidth, canvasHeight);
+  createCanvas(canvasWidth, canvasHeight, WEBGL);
   let width = canvasWidth / resolution;
   let height = canvasHeight / resolution;
   generation = createGrid(width, height);
@@ -21,7 +23,11 @@ function setup() {
 }
 
 function draw() {
+  background(200);
   advanceGeneration();
+  rotateX(frameCount * 0.01);
+  rotateY(frameCount * 0.01);
+  // torus(200, 60, 20, 20);
 }
 
 function mouseClicked() {
