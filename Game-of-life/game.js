@@ -1,14 +1,20 @@
-let canvasWidth = 600;
-let canvasHeight = 600;
-let resolution = 20;
+let canvasWidth = 512;
+let canvasHeight = 256;
+let resolution = 8;
 let generation;
 let fps = 30;
+let canvas;
+let scene, camera, renderer, texture, geometry, material, torus;
 
 function setup() {
   frameRate(fps);
+  noLoop();
   canvasWidth -= canvasWidth % resolution;
   canvasHeight -= canvasHeight % resolution;
-  createCanvas(canvasWidth, canvasHeight, WEBGL);
+  createCanvas(canvasWidth, canvasHeight);
+
+  canvas = document.getElementById('defaultCanvas0');
+  canvas.style.display = 'none';
   let width = canvasWidth / resolution;
   let height = canvasHeight / resolution;
   generation = createGrid(width, height);
@@ -20,27 +26,16 @@ function setup() {
       rect(i * resolution, j * resolution, resolution, resolution);
     }
   }
+  init();
+  animate();
 }
 
-function draw() {
-  background(200);
-  advanceGeneration();
-  rotateX(frameCount * 0.01);
-  rotateY(frameCount * 0.01);
-  // torus(200, 60, 20, 20);
-}
+// function draw() {
+//   advanceGeneration();
+// }
 
 function mouseClicked() {
   randomizeGrid(generation);
-}
-
-class Square {
-  constructor(x, y, value) {
-    this.x = x;
-    this.y = y;
-    this.value = value;
-    this.nextValue = value;
-  }
 }
 
 function createGrid(width, height) {
@@ -102,4 +97,44 @@ function advanceGeneration() {
       rect(i * resolution, j * resolution, resolution, resolution);
     }
   }
+}
+
+class Square {
+  constructor(x, y, value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+    this.nextValue = value;
+  }
+}
+
+function init() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  // adding torus
+  texture = new THREE.Texture(canvas);
+  geometry = new THREE.TorusGeometry(2, 0.5, 20, 20);
+  material = new THREE.MeshBasicMaterial({ map: texture });
+  torus = new THREE.Mesh(geometry, material);
+  scene.add(torus);
+  camera.position.z = 5;
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  advanceGeneration();
+
+  texture.needsUpdate = true;
+  torus.rotation.x += 0.01;
+  torus.rotation.y += 0.01;
+  renderer.render(scene, camera);
 }

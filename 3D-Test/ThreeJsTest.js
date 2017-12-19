@@ -1,8 +1,6 @@
 // canvas
-// let width = window.innerWidth;
-let width = 256;
-// let height = window.innerHeight / 2;
-let height = 128;
+let width = window.innerWidth;
+let height = window.innerHeight / 2;
 let size = 256;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
@@ -40,6 +38,7 @@ function init() {
   torus = new THREE.Mesh(geometry, material);
   scene.add(torus);
   camera.position.z = 5;
+  console.log(canvas);
 }
 
 // animate
