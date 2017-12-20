@@ -17,36 +17,40 @@ let deathColor;
 let aliveColor;
 
 let id;
+let is3D;
 
 function set3D() {
+  is3D = true;
+  resetStats();
   noLoop();
-  canvasWidth -= canvasWidth % resolution;
-  canvasHeight -= canvasHeight % resolution;
   let width = canvasWidth / resolution;
   let height = canvasHeight / resolution;
 
-  createCanvas(canvasWidth, canvasHeight);
+  resizeCanvas(canvasWidth, canvasHeight);
   canvas.style.display = 'none';
 
   generation = createGrid(width, height);
   randomizeGrid(generation);
   renderCanvas();
+
   init();
   animate();
 }
 
 function set2D() {
+  is3D = false;
+  resetStats();
   cancelAnimationFrame(id);
-  createCanvas(windowWidth, windowWidth);
+  resizeCanvas(windowWidth, windowHeight);
   canvas.style.display = 'block';
   renderer.domElement.style.display = 'none';
-  // canvasWidth -= canvasWidth % resolution;
-  // canvasHeight -= canvasHeight % resolution;
-  let width = floor(canvasWidth / resolution);
-  let height = floor(canvasHeight / resolution);
+  let width = floor(windowWidth / resolution);
+  let height = floor(windowHeight / resolution);
+
   generation = createGrid(width, height);
   randomizeGrid(generation);
   renderCanvas();
+
   loop();
 }
 
@@ -61,8 +65,24 @@ function setup() {
   genCountDom = document.getElementById('genCount');
   deathCountDom = document.getElementById('deathCount');
   deathPerGenDom = document.getElementById('deathPerGen');
+
+  resetStats();
+  noLoop();
+  is3D = true;
+  canvasWidth -= canvasWidth % resolution;
+  canvasHeight -= canvasHeight % resolution;
+  let width = canvasWidth / resolution;
+  let height = canvasHeight / resolution;
+  createCanvas(canvasWidth, canvasHeight);
   canvas = document.getElementById('defaultCanvas0');
-  set3D();
+  canvas.style.display = 'none';
+  document.getElementById('canvasPlacement').appendChild(canvas);
+
+  generation = createGrid(width, height);
+  randomizeGrid(generation);
+  renderCanvas();
+  init();
+  animate();
 }
 
 function createGrid(width, height) {
@@ -189,18 +209,20 @@ function updateStats() {
   deathPerGenDom.innerText = round(deathCount / genCount);
 }
 
+function resetStats() {
+  genCount = 0;
+  deathCount = 0;
+}
+
 document.getElementById('fps-range').oninput = function() {
   fps = this.value;
 };
-
 document.getElementById('colorButton1').onchange = function() {
   setColorScheme(0);
 };
-
 document.getElementById('colorButton2').onchange = function() {
   setColorScheme(1);
 };
-
 document.getElementById('colorButton3').onchange = function() {
   setColorScheme(2);
 };
@@ -210,6 +232,44 @@ document.getElementById('dimensionInput').onchange = function() {
   } else {
     set2D();
   }
+};
+
+document.getElementById('higherResolution').onclick = function() {
+  if (
+    document.getElementById('lowerResolution').classList.contains('disabled')
+  ) {
+    document.getElementById('lowerResolution').classList.remove('disabled');
+  }
+  resolution /= 2;
+  // if (is3D) {
+  //   set3D();
+  // } else {
+  //   set2D();
+  // }
+
+  if (resolution == 2) {
+    this.classList.add('disabled');
+  }
+  console.log(resolution);
+};
+
+document.getElementById('lowerResolution').onclick = function() {
+  if (
+    document.getElementById('higherResolution').classList.contains('disabled')
+  ) {
+    document.getElementById('higherResolution').classList.remove('disabled');
+  }
+  resolution *= 2;
+  // if (is3D) {
+  //   set3D();
+  // } else {
+  //   set2D();
+  // }
+
+  if (resolution > 100) {
+    this.classList.add('disabled');
+  }
+  console.log(resolution);
 };
 
 function setColorScheme(schemeId) {

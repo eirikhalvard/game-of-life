@@ -2,7 +2,9 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
   <meta charset="utf-8">
   <title>Game of Life</title>
 </head>
@@ -33,7 +35,7 @@
     <div class="col l6">
       <form action="#">
         <p class="range-field">
-          Speed
+          <i class="material-icons">access_time</i> Speed
           <input type="range" id="fps-range" min="1" max="30" />
         </p>
       </form>
@@ -54,6 +56,11 @@
       <h5>Generations: <span id="genCount">Livet</span></h5>
       <h5>Deaths: <span id="deathCount">Livet</span></h5>
       <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
+    </div>
+    <div class="col l6">
+      Resolution:
+      <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
+      <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
     </div>
   </div>
 
