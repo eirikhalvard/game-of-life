@@ -1,6 +1,6 @@
 let canvasWidth = 512;
-let canvasHeight = 256;
-let resolution = 8;
+let canvasHeight = 128;
+let resolution = 4;
 let generation;
 let fps = 30;
 let canvas;
@@ -20,19 +20,10 @@ function setup() {
   generation = createGrid(width, height);
   randomizeGrid(generation);
 
-  for (let i = 0; i < generation.length; i++) {
-    for (let j = 0; j < generation[i].length; j++) {
-      fill(generation[i][j].value * 255);
-      rect(i * resolution, j * resolution, resolution, resolution);
-    }
-  }
+  renderCanvas();
   init();
   animate();
 }
-
-// function draw() {
-//   advanceGeneration();
-// }
 
 function mouseClicked() {
   randomizeGrid(generation);
@@ -90,13 +81,7 @@ function countNeighbours(arr, x, y) {
 
 function advanceGeneration() {
   createNextGeneration(generation);
-
-  for (let i = 0; i < generation.length; i++) {
-    for (let j = 0; j < generation[i].length; j++) {
-      fill(generation[i][j].value * 255);
-      rect(i * resolution, j * resolution, resolution, resolution);
-    }
-  }
+  renderCanvas();
 }
 
 class Square {
@@ -105,6 +90,19 @@ class Square {
     this.y = y;
     this.value = value;
     this.nextValue = value;
+  }
+}
+
+function renderCanvas() {
+  for (let i = 0; i < generation.length; i++) {
+    for (let j = 0; j < generation[i].length; j++) {
+      if (generation[i][j].value) {
+        fill(204, 24, 24);
+      } else {
+        fill(21, 135, 10);
+      }
+      rect(i * resolution, j * resolution, resolution, resolution);
+    }
   }
 }
 
@@ -122,11 +120,11 @@ function init() {
 
   // adding torus
   texture = new THREE.Texture(canvas);
-  geometry = new THREE.TorusGeometry(2, 0.5, 20, 20);
+  geometry = new THREE.TorusGeometry(25, 10, 30, 30);
   material = new THREE.MeshBasicMaterial({ map: texture });
   torus = new THREE.Mesh(geometry, material);
   scene.add(torus);
-  camera.position.z = 5;
+  camera.position.z = 75;
 }
 
 function animate() {
