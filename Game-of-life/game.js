@@ -125,6 +125,10 @@ function init() {
   torus = new THREE.Mesh(geometry, material);
   scene.add(torus);
   camera.position.z = 75;
+
+  let controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 1, 0);
+  controls.update();
 }
 
 function animate() {
