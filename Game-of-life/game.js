@@ -1,10 +1,17 @@
 let canvasWidth = 512;
 let canvasHeight = 128;
+let windowWidth = window.innerWidth / 2;
+let windowHeight = window.innerHeight;
 let resolution = 4;
 let generation;
 let fps = 30;
-let canvas;
-let scene, camera, renderer, texture, geometry, material, torus;
+let canvas, scene, camera, renderer, texture, geometry, material, torus;
+
+let genCount = 0;
+let genCountDom;
+let deathCount = 0;
+let deathCountDom;
+let deathPerGenDom;
 
 function setup() {
   frameRate(fps);
@@ -13,20 +20,18 @@ function setup() {
   canvasHeight -= canvasHeight % resolution;
   createCanvas(canvasWidth, canvasHeight);
 
+  genCountDom = document.getElementById('genCount');
+  deathCountDom = document.getElementById('deathCount');
+  deathPerGenDom = document.getElementById('deathPerGen');
   canvas = document.getElementById('defaultCanvas0');
   canvas.style.display = 'none';
   let width = canvasWidth / resolution;
   let height = canvasHeight / resolution;
   generation = createGrid(width, height);
   randomizeGrid(generation);
-
   renderCanvas();
   init();
   animate();
-}
-
-function mouseClicked() {
-  randomizeGrid(generation);
 }
 
 function createGrid(width, height) {
@@ -52,6 +57,7 @@ function createNextGeneration(gen) {
       let neighbours = countNeighbours(gen, i, j);
       if (gen[i][j].value == 1 && (neighbours < 2 || neighbours > 3)) {
         gen[i][j].nextValue = 0;
+        deathCount++;
       } else if (gen[i][j].value == 0 && neighbours == 3) {
         gen[i][j].nextValue = 1;
       }
@@ -110,13 +116,13 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(
     75,
-    window.innerWidth / window.innerHeight,
+    windowWidth / windowHeight,
     0.1,
     1000
   );
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+  renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(windowWidth, windowHeight);
+  document.getElementById('canvasPlacement').appendChild(renderer.domElement);
 
   // adding torus
   texture = new THREE.Texture(canvas);
@@ -126,17 +132,32 @@ function init() {
   scene.add(torus);
   camera.position.z = 75;
 
+  // controls
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.target.set(0, 1, 0);
   controls.update();
 }
 
 function animate() {
+  setTimeout(function() {
+    advanceGeneration();
+    updateStats();
+  }, 1000 / fps);
   requestAnimationFrame(animate);
-  advanceGeneration();
-
   texture.needsUpdate = true;
-  torus.rotation.x += 0.01;
-  torus.rotation.y += 0.01;
+  // torus.rotation.x += 0.01;
+  // torus.rotation.y += 0.01;
   renderer.render(scene, camera);
+
+  // genCount++;
 }
+
+function updateStats() {
+  genCountDom.innerText = genCount++;
+  deathCountDom.innerText = deathCount;
+  deathPerGenDom.innerText = round(deathCount / genCount);
+}
+
+document.getElementById('fps-range').oninput = function() {
+  fps = this.value;
+};

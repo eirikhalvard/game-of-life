@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="utf-8">
-    <title>Game of life</title>
-  </head>
-  <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
-    <script src="game.js" charset="utf-8"></script>
-    <script src="OrbitControls.js" charset="utf-8"></script>
-  </body>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>Game of Life</title>
+</head>
+<body class="blue-grey lighten-4">
+  <div class="row">
+    <div class="col l6" id="canvasPlacement"></div>
+    <div class="col l6">
+      <h3>Conway's Game of Life</h3>
+    </div>
+
+    <div class="col l6">
+      <form action="#">
+        <p>
+          <input name="group1" type="radio" id="test1" />
+          <label for="test1">Red</label>
+        </p>
+        <p>
+          <input name="group1" type="radio" id="test2" />
+          <label for="test2">Yellow</label>
+        </p>
+        <p>
+          <input class="with-gap" name="group1" type="radio" id="test3"  />
+          <label for="test3">Green</label>
+        </p>
+        <p>
+          <input name="group1" type="radio" id="test4" disabled="disabled" />
+          <label for="test4">Brown</label>
+        </p>
+      </form>
+    </div>
+
+    <div class="col l6">
+      <form action="#">
+        <p class="range-field">
+          Speed
+          <input type="range" id="fps-range" min="0.2" max="30" />
+        </p>
+      </form>
+    </div>
+
+    <div class="col l6">
+      <div class="switch">
+        <label>
+          2D
+          <input type="checkbox">
+          <span class="lever"></span>
+          3D
+        </label>
+      </div>
+    </div>
+
+    <div class="col l6">
+      <h5>Generations: <span id="genCount">Livet</span></h5>
+      <h5>Deaths: <span id="deathCount">Livet</span></h5>
+      <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="game.js" charset="utf-8"></script>
+  <script src="OrbitControls.js" charset="utf-8"></script>
+</body>
 </html>
