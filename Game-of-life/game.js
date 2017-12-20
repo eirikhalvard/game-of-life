@@ -13,25 +13,56 @@ let deathCount = 0;
 let deathCountDom;
 let deathPerGenDom;
 
-function setup() {
-  frameRate(fps);
+let deathColor;
+let aliveColor;
+
+let id;
+
+function set3D() {
   noLoop();
   canvasWidth -= canvasWidth % resolution;
   canvasHeight -= canvasHeight % resolution;
-  createCanvas(canvasWidth, canvasHeight);
-
-  genCountDom = document.getElementById('genCount');
-  deathCountDom = document.getElementById('deathCount');
-  deathPerGenDom = document.getElementById('deathPerGen');
-  canvas = document.getElementById('defaultCanvas0');
-  canvas.style.display = 'none';
   let width = canvasWidth / resolution;
   let height = canvasHeight / resolution;
+
+  createCanvas(canvasWidth, canvasHeight);
+  canvas.style.display = 'none';
+
   generation = createGrid(width, height);
   randomizeGrid(generation);
   renderCanvas();
   init();
   animate();
+}
+
+function set2D() {
+  cancelAnimationFrame(id);
+  createCanvas(windowWidth, windowWidth);
+  canvas.style.display = 'block';
+  renderer.domElement.style.display = 'none';
+  // canvasWidth -= canvasWidth % resolution;
+  // canvasHeight -= canvasHeight % resolution;
+  let width = floor(canvasWidth / resolution);
+  let height = floor(canvasHeight / resolution);
+  generation = createGrid(width, height);
+  randomizeGrid(generation);
+  renderCanvas();
+  loop();
+}
+
+function draw() {
+  frameRate(fps);
+  advanceGeneration();
+  updateStats();
+}
+
+function setup() {
+  setColorScheme(0);
+  genCountDom = document.getElementById('genCount');
+  deathCountDom = document.getElementById('deathCount');
+  deathPerGenDom = document.getElementById('deathPerGen');
+  canvas = document.getElementById('defaultCanvas0');
+  set3D();
 }
 
 function createGrid(width, height) {
@@ -103,9 +134,9 @@ function renderCanvas() {
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
       if (generation[i][j].value) {
-        fill(204, 24, 24);
+        fill(aliveColor);
       } else {
-        fill(21, 135, 10);
+        fill(deathColor);
       }
       rect(i * resolution, j * resolution, resolution, resolution);
     }
@@ -143,7 +174,7 @@ function animate() {
     advanceGeneration();
     updateStats();
   }, 1000 / fps);
-  requestAnimationFrame(animate);
+  id = requestAnimationFrame(animate);
   texture.needsUpdate = true;
   // torus.rotation.x += 0.01;
   // torus.rotation.y += 0.01;
@@ -161,3 +192,40 @@ function updateStats() {
 document.getElementById('fps-range').oninput = function() {
   fps = this.value;
 };
+
+document.getElementById('colorButton1').onchange = function() {
+  setColorScheme(0);
+};
+
+document.getElementById('colorButton2').onchange = function() {
+  setColorScheme(1);
+};
+
+document.getElementById('colorButton3').onchange = function() {
+  setColorScheme(2);
+};
+document.getElementById('dimensionInput').onchange = function() {
+  if (this.checked) {
+    set3D();
+  } else {
+    set2D();
+  }
+};
+
+function setColorScheme(schemeId) {
+  switch (schemeId) {
+    case 0:
+      aliveColor = color(204, 24, 24);
+      deathColor = color(21, 135, 10);
+      break;
+    case 1:
+      aliveColor = color(71, 105, 209);
+      deathColor = color(229, 143, 45);
+      break;
+    case 2: {
+      aliveColor = color(40, 183, 104);
+      deathColor = color(58, 93, 175);
+      break;
+    }
+  }
+}
