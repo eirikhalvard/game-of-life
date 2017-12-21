@@ -1,5 +1,6 @@
-const canvasWidth = 512;
-const canvasHeight = 128;
+const canvasWidth = 1024;
+const canvasHeight = 256;
+let width, height, numCells;
 let resolution = 4;
 let fps = 30;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
@@ -8,6 +9,7 @@ let deathColor, aliveColor;
 let generation;
 let id;
 let is3D;
+let verbos = true;
 
 // SETUP
 function setup() {
@@ -17,8 +19,7 @@ function setup() {
   noLoop();
   is3D = true;
 
-  let width = floor(canvasWidth / resolution);
-  let height = floor(canvasHeight / resolution);
+  setSize3D();
   createCanvas(width * resolution, height * resolution);
 
   canvas = document.getElementById('defaultCanvas0');
@@ -123,15 +124,17 @@ function init() {
 
 // LOOPS
 function animate() {
-  setTimeout(function() {
-    advanceGeneration();
-    updateStats();
-  }, 1000 / fps);
-  id = requestAnimationFrame(animate);
-  texture.needsUpdate = true;
-  // torus.rotation.x += 0.01;
-  // torus.rotation.y += 0.01;
-  renderer.render(scene, camera);
+  if (is3D) {
+    setTimeout(function() {
+      advanceGeneration();
+      updateStats();
+    }, 1000 / fps);
+    id = requestAnimationFrame(animate);
+    texture.needsUpdate = true;
+    // torus.rotation.x += 0.01;
+    // torus.rotation.y += 0.01;
+    renderer.render(scene, camera);
+  }
 }
 function draw() {
   frameRate(fps);
@@ -144,9 +147,7 @@ function set3D() {
   noLoop();
   resetStats();
   is3D = true;
-
-  let width = floor(canvasWidth / resolution);
-  let height = floor(canvasHeight / resolution);
+  setSize3D();
   resizeCanvas(width * resolution, height * resolution);
   canvas.style.display = 'none';
   renderer.domElement.style.display = 'block';
@@ -162,9 +163,7 @@ function set2D() {
   resetStats();
   is3D = false;
 
-  let width = floor(window.innerWidth / 2 / resolution);
-  let height = floor(window.innerHeight / resolution);
-
+  setSize2D();
   resizeCanvas(width * resolution, height * resolution);
   canvas.style.display = 'block';
   renderer.domElement.style.display = 'none';
@@ -174,6 +173,32 @@ function set2D() {
   renderCanvas();
 
   loop();
+}
+function setSize2D() {
+  width = floor(window.innerWidth / 2 / resolution);
+  height = floor(window.innerHeight / resolution);
+  numCells = width * height;
+  if (verbos) {
+    console.log(
+      `2D-sizes:\n  canvasWidth: ${window.innerWidth /
+        2}\n  canvasHeight: ${window.innerHeight}\n  width: ${width}\n  height: ${height}\n  area: ${window.innerWidth /
+        2 *
+        window.innerHeight}\n  Cells: ${width *
+        height}\n  Resolution: ${resolution}`
+    );
+  }
+}
+function setSize3D() {
+  width = floor(canvasWidth / resolution);
+  height = floor(canvasHeight / resolution);
+  numCells = width * height;
+
+  if (verbos) {
+    console.log(
+      `3D-sizes:\n  canvasWidth: ${canvasWidth}\n  canvasHeight: ${canvasHeight}\n  width: ${width}\n  height: ${height}\n  area: ${canvasWidth *
+        canvasHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
+    );
+  }
 }
 
 // CREATING A NEW GAME
