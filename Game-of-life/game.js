@@ -1,6 +1,9 @@
 const verbos = true;
 const canvasWidth = 1024;
 const canvasHeight = 256;
+const smallScreen = 600;
+let winWidth;
+let winHeight;
 let resolution = 16;
 let resolution2D, resolution3D;
 let width, height, numCells;
@@ -17,16 +20,24 @@ let is3D;
 
 // SETUP
 function setup() {
+  winWidth =
+    window.innerWidth > smallScreen ? window.innerWidth / 2 : window.innerWidth;
+  winHeight =
+    window.innerWidth > smallScreen
+      ? window.innerHeight
+      : window.innerHeight / 2;
+
   addEventHandlers();
   setColorScheme(0);
   resetStats();
   noLoop();
   is3D = true;
+
   setResolution();
   resolution = resolution3D;
   setSize3D();
-  createCanvas(width * resolution, height * resolution);
 
+  createCanvas(width * resolution, height * resolution);
   canvas = document.getElementById('defaultCanvas0');
   canvas.style.display = 'none';
   document.getElementById('canvasPlacement').appendChild(canvas);
@@ -129,14 +140,9 @@ function setResolution() {
 }
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / 2 / window.innerHeight,
-    0.1,
-    1000
-  );
+  camera = new THREE.PerspectiveCamera(75, winWidth / winHeight, 0.1, 1000);
   renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(window.innerWidth / 2, window.innerHeight);
+  renderer.setSize(winWidth, winHeight);
   document.getElementById('canvasPlacement').appendChild(renderer.domElement);
 
   // adding torus
@@ -207,16 +213,13 @@ function set2D() {
   loop();
 }
 function setSize2D() {
-  width = floor(window.innerWidth / 2 / resolution);
-  height = floor(window.innerHeight / resolution);
+  width = floor(winWidth / resolution);
+  height = floor(winHeight / resolution);
   numCells = width * height;
   if (verbos) {
     console.log(
-      `2D-sizes:\n  canvasWidth: ${window.innerWidth /
-        2}\n  canvasHeight: ${window.innerHeight}\n  width: ${width}\n  height: ${height}\n  area: ${window.innerWidth /
-        2 *
-        window.innerHeight}\n  Cells: ${width *
-        height}\n  Resolution: ${resolution}`
+      `2D-sizes:\n  canvasWidth: ${winWidth}\n  canvasHeight: ${winHeight}\n  width: ${width}\n  height: ${height}\n  area: ${winWidth *
+        winHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
     );
   }
 }
