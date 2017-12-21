@@ -1,7 +1,11 @@
+const verbos = true;
 const canvasWidth = 1024;
 const canvasHeight = 256;
+let resolution = 16;
+let resolution2D, resolution3D;
 let width, height, numCells;
-let resolution = 4;
+const maxCells = 5000;
+const minCells = 64;
 let fps = 30;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
@@ -9,7 +13,6 @@ let deathColor, aliveColor;
 let generation;
 let id;
 let is3D;
-let verbos = true;
 
 // SETUP
 function setup() {
@@ -18,7 +21,8 @@ function setup() {
   resetStats();
   noLoop();
   is3D = true;
-
+  setResolution();
+  resolution = resolution3D;
   setSize3D();
   createCanvas(width * resolution, height * resolution);
 
@@ -37,9 +41,11 @@ function addEventHandlers() {
   genCountDom = document.getElementById('genCount');
   deathCountDom = document.getElementById('deathCount');
   deathPerGenDom = document.getElementById('deathPerGen');
+
   document.getElementById('fps-range').oninput = function() {
     fps = this.value;
   };
+
   document.getElementById('colorButton1').onchange = function() {
     setColorScheme(0);
   };
@@ -49,44 +55,50 @@ function addEventHandlers() {
   document.getElementById('colorButton3').onchange = function() {
     setColorScheme(2);
   };
+
   document.getElementById('dimensionInput').onchange = function() {
     if (this.checked) {
       set3D();
     } else {
       set2D();
     }
-  };
-  document.getElementById('higherResolution').onclick = function() {
-    if (
-      document.getElementById('lowerResolution').classList.contains('disabled')
-    ) {
+    if (numCells > maxCells) {
+      document.getElementById('higherResolution').classList.add('disabled');
+      document.getElementById('lowerResolution').classList.remove('disabled');
+    } else if (numCells < minCells) {
+      document.getElementById('higherResolution').classList.remove('disabled');
+      document.getElementById('lowerResolution').classList.add('disabled');
+    } else {
+      document.getElementById('higherResolution').classList.remove('disabled');
       document.getElementById('lowerResolution').classList.remove('disabled');
     }
-    resolution /= 2;
+  };
+
+  document.getElementById('higherResolution').onclick = function() {
+    document.getElementById('lowerResolution').classList.remove('disabled');
     if (is3D) {
+      resolution3D /= 2;
       set3D();
     } else {
+      resolution2D /= 2;
       set2D();
     }
 
-    if (resolution == 2) {
+    if (numCells > maxCells) {
       this.classList.add('disabled');
     }
   };
   document.getElementById('lowerResolution').onclick = function() {
-    if (
-      document.getElementById('higherResolution').classList.contains('disabled')
-    ) {
-      document.getElementById('higherResolution').classList.remove('disabled');
-    }
-    resolution *= 2;
+    document.getElementById('higherResolution').classList.remove('disabled');
     if (is3D) {
+      resolution3D *= 2;
       set3D();
     } else {
+      resolution2D *= 2;
       set2D();
     }
 
-    if (resolution > 100) {
+    if (numCells < minCells) {
       this.classList.add('disabled');
     }
   };
@@ -95,6 +107,24 @@ function addEventHandlers() {
     resetStats();
     randomizeGrid();
   };
+}
+function setResolution() {
+  resolution3D = resolution;
+  resolution2D = resolution;
+
+  let min = 500;
+  let max = 2000;
+  setSize2D();
+
+  while (numCells < min) {
+    resolution2D *= 2;
+    setSize2D();
+  }
+
+  while (numCells > max) {
+    resolution2D /= 2;
+    setSize2D();
+  }
 }
 function init() {
   scene = new THREE.Scene();
@@ -147,6 +177,7 @@ function set3D() {
   noLoop();
   resetStats();
   is3D = true;
+  resolution = resolution3D;
   setSize3D();
   resizeCanvas(width * resolution, height * resolution);
   canvas.style.display = 'none';
@@ -162,7 +193,7 @@ function set2D() {
   cancelAnimationFrame(id);
   resetStats();
   is3D = false;
-
+  resolution = resolution2D;
   setSize2D();
   resizeCanvas(width * resolution, height * resolution);
   canvas.style.display = 'block';
