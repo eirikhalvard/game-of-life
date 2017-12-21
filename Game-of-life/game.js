@@ -6,6 +6,7 @@ let resolution2D, resolution3D;
 let width, height, numCells;
 const maxCells = 5000;
 const minCells = 64;
+const resolutionMultiplier2D = 1.4;
 let fps = 30;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
@@ -80,7 +81,7 @@ function addEventHandlers() {
       resolution3D /= 2;
       set3D();
     } else {
-      resolution2D /= 2;
+      resolution2D = round(resolution2D / resolutionMultiplier2D);
       set2D();
     }
 
@@ -94,7 +95,7 @@ function addEventHandlers() {
       resolution3D *= 2;
       set3D();
     } else {
-      resolution2D *= 2;
+      resolution2D = round(resolution2D * resolutionMultiplier2D);
       set2D();
     }
 
