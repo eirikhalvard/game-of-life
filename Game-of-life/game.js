@@ -2,18 +2,16 @@ const verbos = true;
 const canvasWidth = 1024;
 const canvasHeight = 256;
 const smallScreen = 600;
-let winWidth;
-let winHeight;
 let resolution = 16;
+let winWidth, winHeight, width, height, numCells;
 let resolution2D, resolution3D;
-let width, height, numCells;
 const maxCells = 5000;
 const minCells = 64;
 const resolutionMultiplier2D = 1.4;
 let fps = 30;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
-let deathColor, aliveColor;
+let deathColor, aliveColor, strokeColor;
 let generation;
 let id;
 let is3D;
@@ -53,6 +51,9 @@ function addEventHandlers() {
   genCountDom = document.getElementById('genCount');
   deathCountDom = document.getElementById('deathCount');
   deathPerGenDom = document.getElementById('deathPerGen');
+  window.onresize = function() {
+    setNewSize();
+  };
 
   document.getElementById('fps-range').oninput = function() {
     fps = this.value;
@@ -151,7 +152,7 @@ function init() {
   material = new THREE.MeshBasicMaterial({ map: texture });
   torus = new THREE.Mesh(geometry, material);
   scene.add(torus);
-  camera.position.z = 75;
+  camera.position.z = 75 * 500 / winWidth;
 
   // controls
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -287,6 +288,7 @@ function createNextGeneration(gen) {
   }
 }
 function renderCanvas() {
+  stroke(strokeColor);
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
       fill(generation[i][j].value ? aliveColor : deathColor);
@@ -318,21 +320,47 @@ function resetStats() {
   deathCount = 0;
 }
 
-// UPDATING COLOR
+// UPDATING
 function setColorScheme(schemeId) {
   switch (schemeId) {
     case 0:
-      aliveColor = color(204, 24, 24);
-      deathColor = color(21, 135, 10);
+      aliveColor = color(21, 135, 10);
+      deathColor = color(204, 24, 24);
+      strokeColor = color(50, 50, 50);
       break;
     case 1:
       aliveColor = color(229, 143, 45);
       deathColor = color(71, 105, 209);
+      strokeColor = color(0, 0, 150);
       break;
     case 2: {
       aliveColor = color(40, 183, 104);
       deathColor = color(58, 93, 175);
+      strokeColor = color(0, 0, 150);
       break;
     }
+  }
+}
+function setNewSize() {
+  winWidth =
+    window.innerWidth > smallScreen ? window.innerWidth / 2 : window.innerWidth;
+  winHeight =
+    window.innerWidth > smallScreen
+      ? window.innerHeight
+      : window.innerHeight / 2;
+
+  if (is3D) {
+    camera = new THREE.PerspectiveCamera(75, winWidth / winHeight, 0.1, 1000);
+    renderer.setSize(winWidth, winHeight);
+    camera.position.z = 75 * 500 / winWidth;
+    let controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 1, 0);
+    controls.update();
+  } else {
+    setSize2D();
+    resizeCanvas(width * resolution, height * resolution);
+    generation = createGrid(width, height);
+    randomizeGrid();
+    renderCanvas();
   }
 }
