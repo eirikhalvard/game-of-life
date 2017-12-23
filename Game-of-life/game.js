@@ -8,7 +8,7 @@ let resolution2D, resolution3D;
 const maxCells = 5000;
 const minCells = 64;
 const resolutionMultiplier2D = 1.4;
-let fps = 30;
+let fps, timeInterval, updateTime;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
 let deathColor, aliveColor, strokeColor;
@@ -30,6 +30,9 @@ function setup() {
   resetStats();
   noLoop();
   is3D = true;
+  fps = document.getElementById('fps-range').value;
+  timeInterval = 1000 / fps;
+  updateTime = 0;
 
   setResolution();
   resolution = resolution3D;
@@ -57,6 +60,7 @@ function addEventHandlers() {
 
   document.getElementById('fps-range').oninput = function() {
     fps = this.value;
+    timeInterval = 1000 / fps;
   };
 
   document.getElementById('colorButton1').onchange = function() {
@@ -159,14 +163,14 @@ function init() {
   controls.target.set(0, 1, 0);
   controls.update();
 }
-
 // LOOPS
 function animate() {
   if (is3D) {
-    setTimeout(function() {
+    if (updateTime + timeInterval < millis()) {
       advanceGeneration();
       updateStats();
-    }, 1000 / fps);
+      updateTime = millis();
+    }
     id = requestAnimationFrame(animate);
     texture.needsUpdate = true;
     // torus.rotation.x += 0.01;
@@ -175,9 +179,11 @@ function animate() {
   }
 }
 function draw() {
-  frameRate(fps);
-  advanceGeneration();
-  updateStats();
+  if (updateTime + timeInterval < millis()) {
+    advanceGeneration();
+    updateStats();
+    updateTime = millis();
+  }
 }
 
 // SWITCHING BETWEEN 2D AND 3D
