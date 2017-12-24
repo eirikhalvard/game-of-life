@@ -1,3 +1,19 @@
 #fps-range {
   border: none;
 }
+
+.color-container {
+  padding: 20px;
+}
+
+.color-box {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.color-part {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}

@@ -10,62 +10,96 @@
 </head>
 <body class="blue-grey lighten-4">
   <div class="row">
-    <div class="col l6" id="canvasPlacement"></div>
-    <div class="col l6">
+    <div class="col s12 l6" id="canvasPlacement"></div>
+    <div class="col s12 l6">
       <h3>Conway's Game of Life</h3>
     </div>
+    <div class="col s12 l6">
+      <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header active"><i class="material-icons">build</i>Settings</div>
+        <div class="collapsible-body">
+          <!-- Settings Content Start -->
+          <!-- Colors -->
+          <div class="color-container">
+            <div class="color-box">
+              <div class="color-part blue">
 
-    <div class="col l6">
-      <form action="#">
-        <p>
-          <input name="group1" type="radio" id="colorButton1" checked="true" />
-          <label for="colorButton1">Christmas Colors</label>
-        </p>
-        <p>
-          <input name="group1" type="radio" id="colorButton2" />
-          <label for="colorButton2">Blue & Orange</label>
-        </p>
-        <p>
-          <input name="group1" type="radio" id="colorButton3"  />
-          <label for="colorButton3">Blue & Green</label>
-        </p>
-      </form>
-    </div>
+              </div>
+              <div class="color-part teal">
 
-    <div class="col l6">
-      <form action="#">
-        <p class="range-field">
-          <i class="material-icons">access_time</i> Speed
-          <input type="range" id="fps-range" min="1" max="30" />
-        </p>
-      </form>
-    </div>
+              </div>
+            </div>
+          </div>
+          <form action="#">
+            <p>
+              <input name="group1" type="radio" id="colorButton1" checked="true" />
+              <label for="colorButton1">Christmas Colors</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="colorButton2" />
+              <label for="colorButton2">Blue & Orange</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="colorButton3"  />
+              <label for="colorButton3">Blue & Green</label>
+            </p>
+          </form>
 
-    <div class="col l6">
-      <div class="switch">
-        <label>
-          2D
-          <input type="checkbox" checked="true" id="dimensionInput">
-          <span class="lever"></span>
-          3D
-        </label>
-      </div>
-    </div>
+          <!-- Speed -->
 
-    <div class="col l6">
-      <h5>Generations: <span id="genCount">Livet</span></h5>
-      <h5>Deaths: <span id="deathCount">Livet</span></h5>
-      <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
-    </div>
-    <div class="col l6">
-      Resolution:
-      <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
-      <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
-    </div>
-    <div class="col l6">
-      <a id="randomize" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Randomize</a>
+          <form action="#">
+            <p class="range-field">
+              <h5><i class="material-icons">access_time</i> Speed</h5>
+              <input type="range" id="fps-range" min="1" max="60" />
+            </p>
+          </form>
+
+          <!-- Dimension switch -->
+          <h5>Dimension: </h5>
+          <div class="switch">
+            <label>
+              2D
+              <input type="checkbox" checked="true" id="dimensionInput">
+              <span class="lever"></span>
+              3D
+            </label>
+          </div>
+
+          <!-- Resolution -->
+          <h5>Resolution:</h5>
+          <div>
+            <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
+            <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
+          </div>
+
+          <!-- New game -->
+          <a id="randomize" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Randomize</a>
+
+          <!-- Settings Content End -->
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">info</i>About</div>
+        <div class="collapsible-body">
+          <!-- About Content Start -->
+          <!-- About Content End -->
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">insert_chart</i>Stats</div>
+        <div class="collapsible-body">
+          <!-- Stats Content Start -->
+          <h5>Generations: <span id="genCount">Livet</span></h5>
+          <h5>Deaths: <span id="deathCount">Livet</span></h5>
+          <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
+          <!-- Stats Content End -->
+        </div>
+      </li>
+    </ul>
     </div>
   </div>
+
 
 
 
