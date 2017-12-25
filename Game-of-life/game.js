@@ -325,7 +325,9 @@ function pulsar() {
   fillGrid(locations, start);
 }
 function findStartLocation(patternWidth, patternHeight) {
-  return { x: 2, y: 2 };
+  let startX = floor((width - patternWidth) / 2);
+  let startY = floor((height - patternHeight) / 2);
+  return { x: startX, y: startY };
 }
 function fillGrid(locations, start) {
   for (let i = 0; i < generation.length; i++) {
@@ -455,6 +457,7 @@ function makeColorSection() {
   for (let i = 0; i < colors.length; i++) {
     let box = document.createElement('div');
     box.classList.add('color-box');
+    box.classList.add('z-depth-1');
     box.onclick = function() {
       setColor(i);
     };
@@ -477,7 +480,9 @@ function makeColorSection() {
   }
 }
 function setColor(id) {
-  colorContainer.childNodes[colorId].classList.remove('z-depth-2');
+  colorContainer.childNodes[colorId].classList.remove('z-depth-3');
+  colorContainer.childNodes[colorId].classList.add('z-depth-1');
   colorId = id;
-  colorContainer.childNodes[colorId].classList.add('z-depth-2');
+  colorContainer.childNodes[colorId].classList.remove('z-depth-1');
+  colorContainer.childNodes[colorId].classList.add('z-depth-3');
 }
