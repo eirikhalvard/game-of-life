@@ -10,71 +10,83 @@
 </head>
 <body class="blue-grey lighten-4">
   <div class="row">
-    <div class="col s12 l6" id="canvasPlacement"></div>
-    <div class="col s12 l6">
+    <div class="col s12 m6 l6" id="canvasPlacement"></div>
+    <div class="col s12 m6 l6">
       <h3>Conway's Game of Life</h3>
     </div>
-    <div class="col s12 l6">
+    <div class="col s12 m6 l6">
       <ul class="collapsible" data-collapsible="accordion">
-      <li>
-        <div class="collapsible-header active"><i class="material-icons">build</i>Settings</div>
-        <div class="collapsible-body">
-          <!-- Settings Content Start -->
-          <!-- Colors -->
-          <h5>Choose color: </h5>
-          <div class="color-container" id="colorContainer"></div>
+        <li>
+          <div class="collapsible-header active"><i class="material-icons">build</i>Settings</div>
+          <div class="collapsible-body">
+            <div class="row">
 
-          <!-- Speed -->
+              <!-- Settings Content Start -->
+              <!-- Colors -->
+              <div class="col s12 m12 l6">
+                <h5>Choose color: </h5>
+                <div class="color-container" id="colorContainer"></div>
+              </div>
 
-          <form action="#">
-            <p class="range-field">
-              <h5><i class="material-icons">access_time</i> Speed</h5>
-              <input type="range" id="fps-range" min="1" max="60" />
-            </p>
-          </form>
+              <!-- Speed -->
+              <div class="col s12 m12 l6">
+                <form action="#">
+                  <p class="range-field">
+                    <h5><i class="material-icons">access_time</i> Speed</h5>
+                    <input type="range" id="fps-range" min="1" max="60" />
+                  </p>
+                </form>
+              </div>
 
-          <!-- Dimension switch -->
-          <h5>Dimension: </h5>
-          <div class="switch">
-            <label>
-              2D
-              <input type="checkbox" checked="true" id="dimensionInput">
-              <span class="lever"></span>
-              3D
-            </label>
+              <!-- Dimension switch -->
+              <div class="col s12 m12 l6">
+                <h5>Dimension: </h5>
+                <div class="switch">
+                <label>
+                  2D
+                  <input type="checkbox" checked="true" id="dimensionInput">
+                  <span class="lever"></span>
+                  3D
+                </label>
+              </div>
+              </div>
+
+              <!-- Resolution -->
+              <div class="col s12 m12 l6">
+                <h5>Resolution:</h5>
+                <div>
+                  <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
+                  <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
+                </div>
+              </div>
+
+              <!-- New game -->
+              <div class="col s12 m12 l6">
+                <a id="randomize" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Randomize</a>
+              </div>
+
+            </div>
+            <!-- Settings Content End -->
           </div>
-
-          <!-- Resolution -->
-          <h5>Resolution:</h5>
-          <div>
-            <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
-            <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">info</i>About</div>
+          <div class="collapsible-body">
+            <!-- About Content Start -->
+            <!-- About Content End -->
           </div>
-
-          <!-- New game -->
-          <a id="randomize" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Randomize</a>
-
-          <!-- Settings Content End -->
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">info</i>About</div>
-        <div class="collapsible-body">
-          <!-- About Content Start -->
-          <!-- About Content End -->
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header"><i class="material-icons">insert_chart</i>Stats</div>
-        <div class="collapsible-body">
-          <!-- Stats Content Start -->
-          <h5>Generations: <span id="genCount">Livet</span></h5>
-          <h5>Deaths: <span id="deathCount">Livet</span></h5>
-          <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
-          <!-- Stats Content End -->
-        </div>
-      </li>
-    </ul>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">insert_chart</i>Stats</div>
+          <div class="collapsible-body">
+            <!-- Stats Content Start -->
+            <h5>Generations: <span id="genCount">Livet</span></h5>
+            <h5>Deaths: <span id="deathCount">Livet</span></h5>
+            <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
+            <!-- Stats Content End -->
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 

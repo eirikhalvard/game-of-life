@@ -16,55 +16,11 @@ let generation;
 let id;
 let is3D;
 
+let colorContainer;
 let colors;
 let colorId;
 
 // SETUP
-function initColors() {
-  colors = [
-    {
-      alive: color(21, 135, 10),
-      death: color(204, 24, 24),
-      stroke: color(50, 50, 50)
-    },
-    {
-      alive: color(229, 143, 45),
-      death: color(71, 105, 209),
-      stroke: color(0, 0, 150)
-    },
-    {
-      alive: color(40, 183, 104),
-      death: color(58, 93, 175),
-      stroke: color(0, 0, 150)
-    }
-  ];
-}
-function makeColorSection() {
-  let colorContainer = document.getElementById('colorContainer');
-  for (let i = 0; i < colors.length; i++) {
-    let box = document.createElement('div');
-    box.className = 'color-box';
-    box.onclick = function() {
-      colorId = i;
-    };
-    box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${colors[i]
-      .stroke.levels[1]}, ${colors[i].stroke.levels[2]})`;
-
-    let alive = document.createElement('div');
-    alive.className = 'color-part';
-    alive.style.backgroundColor = `rgb(${colors[i].alive.levels[0]}, ${colors[i]
-      .alive.levels[1]}, ${colors[i].alive.levels[2]})`;
-    box.appendChild(alive);
-
-    let death = document.createElement('div');
-    death.className = 'color-part';
-    death.style.backgroundColor = `rgb(${colors[i].death.levels[0]}, ${colors[i]
-      .death.levels[1]}, ${colors[i].death.levels[2]})`;
-    box.appendChild(death);
-
-    colorContainer.appendChild(box);
-  }
-}
 function setup() {
   winWidth =
     window.innerWidth > smallScreen ? window.innerWidth / 2 : window.innerWidth;
@@ -77,6 +33,7 @@ function setup() {
   initColors();
   makeColorSection();
   colorId = 0;
+  setColor(0);
   resetStats();
   noLoop();
   is3D = true;
@@ -105,6 +62,8 @@ function addEventHandlers() {
   genCountDom = document.getElementById('genCount');
   deathCountDom = document.getElementById('deathCount');
   deathPerGenDom = document.getElementById('deathPerGen');
+  colorContainer = document.getElementById('colorContainer');
+
   window.onresize = function() {
     setNewSize();
   };
@@ -204,6 +163,7 @@ function init() {
   controls.target.set(0, 1, 0);
   controls.update();
 }
+
 // LOOPS
 function animate() {
   if (is3D) {
@@ -307,6 +267,86 @@ function randomizeGrid() {
     }
   }
 }
+function gospelGliderGun() {}
+function pulsar() {
+  const patternWidth = 15;
+  const patternHeight = 15;
+  let start = findStartLocation(patternWidth, patternHeight);
+  const locations = [
+    [1, 3],
+    [1, 4],
+    [1, 5],
+    [1, 9],
+    [1, 10],
+    [1, 11],
+    [3, 1],
+    [3, 6],
+    [3, 8],
+    [3, 13],
+    [4, 1],
+    [4, 6],
+    [4, 8],
+    [4, 13],
+    [5, 1],
+    [5, 6],
+    [5, 8],
+    [5, 13],
+    [6, 3],
+    [6, 4],
+    [6, 5],
+    [6, 9],
+    [6, 10],
+    [6, 11],
+    [8, 3],
+    [8, 4],
+    [8, 5],
+    [8, 9],
+    [8, 10],
+    [8, 11],
+    [9, 1],
+    [9, 6],
+    [9, 8],
+    [9, 13],
+    [10, 1],
+    [10, 6],
+    [10, 8],
+    [10, 13],
+    [11, 1],
+    [11, 6],
+    [11, 8],
+    [11, 13],
+    [13, 3],
+    [13, 4],
+    [13, 5],
+    [13, 9],
+    [13, 10],
+    [13, 11]
+  ];
+  fillGrid(locations, start);
+}
+function findStartLocation(patternWidth, patternHeight) {
+  return { x: 2, y: 2 };
+}
+function fillGrid(locations, start) {
+  for (let i = 0; i < generation.length; i++) {
+    for (let j = 0; j < generation[i].length; j++) {
+      generation[i][j].value = 0;
+      generation[i][j].nextValue = 0;
+    }
+  }
+
+  for (let i = 0; i < locations.length; i++) {
+    console.log(
+      `-------\n  x: ${start.x + locations[i][0]}\n  y: ${start.y +
+        locations[i][1]}`
+    );
+
+    generation[start.x + locations[i][0]][start.y + locations[i][1]].value = 1;
+    generation[start.x + locations[i][0]][
+      start.y + locations[i][1]
+    ].nextValue = 1;
+  }
+}
 
 // ADVANCE TO NEXT GENERATION
 function advanceGeneration() {
@@ -391,4 +431,53 @@ function setNewSize() {
     randomizeGrid();
     renderCanvas();
   }
+}
+function initColors() {
+  colors = [
+    {
+      alive: color(21, 135, 10),
+      death: color(204, 24, 24),
+      stroke: color(50, 50, 50)
+    },
+    {
+      alive: color(229, 143, 45),
+      death: color(71, 105, 209),
+      stroke: color(0, 0, 150)
+    },
+    {
+      alive: color(40, 183, 104),
+      death: color(58, 93, 175),
+      stroke: color(0, 0, 150)
+    }
+  ];
+}
+function makeColorSection() {
+  for (let i = 0; i < colors.length; i++) {
+    let box = document.createElement('div');
+    box.classList.add('color-box');
+    box.onclick = function() {
+      setColor(i);
+    };
+    box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${colors[i]
+      .stroke.levels[1]}, ${colors[i].stroke.levels[2]})`;
+
+    let alive = document.createElement('div');
+    alive.classList.add('color-part');
+    alive.style.backgroundColor = `rgb(${colors[i].alive.levels[0]}, ${colors[i]
+      .alive.levels[1]}, ${colors[i].alive.levels[2]})`;
+    box.appendChild(alive);
+
+    let death = document.createElement('div');
+    death.classList.add('color-part');
+    death.style.backgroundColor = `rgb(${colors[i].death.levels[0]}, ${colors[i]
+      .death.levels[1]}, ${colors[i].death.levels[2]})`;
+    box.appendChild(death);
+
+    colorContainer.appendChild(box);
+  }
+}
+function setColor(id) {
+  colorContainer.childNodes[colorId].classList.remove('z-depth-2');
+  colorId = id;
+  colorContainer.childNodes[colorId].classList.add('z-depth-2');
 }
