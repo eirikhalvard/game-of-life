@@ -47,6 +47,8 @@ function makeColorSection() {
     box.onclick = function() {
       colorId = i;
     };
+    box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${colors[i]
+      .stroke.levels[1]}, ${colors[i].stroke.levels[2]})`;
 
     let alive = document.createElement('div');
     alive.className = 'color-part';
@@ -110,16 +112,6 @@ function addEventHandlers() {
   document.getElementById('fps-range').oninput = function() {
     fps = this.value;
     timeInterval = 1000 / fps;
-  };
-
-  document.getElementById('colorButton1').onchange = function() {
-    colorId = 0;
-  };
-  document.getElementById('colorButton2').onchange = function() {
-    colorId = 1;
-  };
-  document.getElementById('colorButton3').onchange = function() {
-    colorId = 2;
   };
 
   document.getElementById('dimensionInput').onchange = function() {
