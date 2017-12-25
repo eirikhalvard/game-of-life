@@ -450,6 +450,21 @@ function initColors() {
       alive: color(40, 183, 104),
       death: color(58, 93, 175),
       stroke: color(0, 0, 150)
+    },
+    {
+      alive: color(240, 129, 15),
+      death: color(6, 56, 82),
+      stroke: color(1, 26, 39)
+    },
+    {
+      alive: color(251, 101, 66),
+      death: color(255, 187, 0),
+      stroke: color(55, 94, 151)
+    },
+    {
+      alive: color(25, 149, 173),
+      death: color(241, 241, 242),
+      stroke: color(161, 214, 226)
     }
   ];
 }
