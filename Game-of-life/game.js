@@ -16,7 +16,53 @@ let generation;
 let id;
 let is3D;
 
+let colors;
+let colorId;
+
 // SETUP
+function initColors() {
+  colors = [
+    {
+      alive: color(21, 135, 10),
+      death: color(204, 24, 24),
+      stroke: color(50, 50, 50)
+    },
+    {
+      alive: color(229, 143, 45),
+      death: color(71, 105, 209),
+      stroke: color(0, 0, 150)
+    },
+    {
+      alive: color(40, 183, 104),
+      death: color(58, 93, 175),
+      stroke: color(0, 0, 150)
+    }
+  ];
+}
+function makeColorSection() {
+  let colorContainer = document.getElementById('colorContainer');
+  for (let i = 0; i < colors.length; i++) {
+    let box = document.createElement('div');
+    box.className = 'color-box';
+    box.onclick = function() {
+      colorId = i;
+    };
+
+    let alive = document.createElement('div');
+    alive.className = 'color-part';
+    alive.style.backgroundColor = `rgb(${colors[i].alive.levels[0]}, ${colors[i]
+      .alive.levels[1]}, ${colors[i].alive.levels[2]})`;
+    box.appendChild(alive);
+
+    let death = document.createElement('div');
+    death.className = 'color-part';
+    death.style.backgroundColor = `rgb(${colors[i].death.levels[0]}, ${colors[i]
+      .death.levels[1]}, ${colors[i].death.levels[2]})`;
+    box.appendChild(death);
+
+    colorContainer.appendChild(box);
+  }
+}
 function setup() {
   winWidth =
     window.innerWidth > smallScreen ? window.innerWidth / 2 : window.innerWidth;
@@ -26,7 +72,9 @@ function setup() {
       : window.innerHeight / 2;
 
   addEventHandlers();
-  setColorScheme(0);
+  initColors();
+  makeColorSection();
+  colorId = 0;
   resetStats();
   noLoop();
   is3D = true;
@@ -44,6 +92,7 @@ function setup() {
   document.getElementById('canvasPlacement').appendChild(canvas);
 
   generation = createGrid(width, height);
+
   randomizeGrid();
   renderCanvas();
 
@@ -64,13 +113,13 @@ function addEventHandlers() {
   };
 
   document.getElementById('colorButton1').onchange = function() {
-    setColorScheme(0);
+    colorId = 0;
   };
   document.getElementById('colorButton2').onchange = function() {
-    setColorScheme(1);
+    colorId = 1;
   };
   document.getElementById('colorButton3').onchange = function() {
-    setColorScheme(2);
+    colorId = 2;
   };
 
   document.getElementById('dimensionInput').onchange = function() {
@@ -294,10 +343,12 @@ function createNextGeneration(gen) {
   }
 }
 function renderCanvas() {
-  stroke(strokeColor);
+  stroke(colors[colorId].stroke);
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
-      fill(generation[i][j].value ? aliveColor : deathColor);
+      fill(
+        generation[i][j].value ? colors[colorId].alive : colors[colorId].death
+      );
       rect(i * resolution, j * resolution, resolution, resolution);
     }
   }
@@ -326,27 +377,6 @@ function resetStats() {
   deathCount = 0;
 }
 
-// UPDATING
-function setColorScheme(schemeId) {
-  switch (schemeId) {
-    case 0:
-      aliveColor = color(21, 135, 10);
-      deathColor = color(204, 24, 24);
-      strokeColor = color(50, 50, 50);
-      break;
-    case 1:
-      aliveColor = color(229, 143, 45);
-      deathColor = color(71, 105, 209);
-      strokeColor = color(0, 0, 150);
-      break;
-    case 2: {
-      aliveColor = color(40, 183, 104);
-      deathColor = color(58, 93, 175);
-      strokeColor = color(0, 0, 150);
-      break;
-    }
-  }
-}
 function setNewSize() {
   winWidth =
     window.innerWidth > smallScreen ? window.innerWidth / 2 : window.innerWidth;

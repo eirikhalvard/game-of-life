@@ -7,13 +7,15 @@
 }
 
 .color-box {
-  display: inline;
+  display: inline-block;
   margin-left: 10px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .color-part {
-  width: 20px;
-  height: 20px;
+  /* margin-right: -4px; */
+  width: 30px;
+  height: 30px;
   display: inline-block;
 }
