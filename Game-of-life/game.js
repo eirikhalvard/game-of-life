@@ -496,8 +496,8 @@ function makeColorSection() {
 }
 function setColor(id) {
   colorContainer.childNodes[colorId].classList.remove('z-depth-3');
-  colorContainer.childNodes[colorId].classList.add('z-depth-1');
+  // colorContainer.childNodes[colorId].classList.add('z-depth-1');
   colorId = id;
-  colorContainer.childNodes[colorId].classList.remove('z-depth-1');
+  // colorContainer.childNodes[colorId].classList.remove('z-depth-1');
   colorContainer.childNodes[colorId].classList.add('z-depth-3');
 }
