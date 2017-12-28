@@ -37,6 +37,29 @@ let patterns = {
     y: 9,
     enc:
       '24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8bo3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!'
+  },
+  p44piHeptominoHassler: {
+    x: 31,
+    y: 44,
+    enc:
+      '9b2o4b2o4b2o8b$8bo2bobo4bobo2bo7b$8b3o10b3o7b$11b2o6b2o10b$10bo2b6o2bo9b$10b2o8b2o9b12$2o12b3o12b2o$2o11bo3bo11b2o$13b2ob2o13b5$13b2ob2o13b$2o11bo3bo11b2o$2o12b3o12b2o12$10b2o8b2o9b$10bo2b6o2bo9b$11b2o6b2o10b$8b3o10b3o7b$8bo2bobo4bobo2bo7b$9b2o4b2o4b2o!'
+  },
+  p200TrafficJam: {
+    x: 77,
+    y: 77,
+    enc:
+      '26b2o4b2o$26bobo2bobo$28b4o$26bo2b2o2bo$26bo2b2o2bo$28bo2bo18b2o4b2o$50bobo2bobo$35b3o14b4o$35b3obo10bo2b2o2bo$36bobobo9bo2b2o2bo$30b3o4bo' +
+      '2bo11bo2bo$38b2o20bobo$14b2o12bo5bo24bo$13bo2bo11bo5bo25bo2bo$12bobobo11bo5bo20bo4bobobo$12bo2bo39bo5bo2bo$11bo18b3o22bo6b2o$12bobo3bo$18bo32b3o3b3o$5b2ob2o8bo$5bo49bo$6b2o2bo3b3o3b3o7bo24bo$7b3o20bo8bo15bo$7b3o8bo11bo8bo14bo$6b2o2bo7bo20bo14bo$5bo12bo7b3o3b3o19bo$5b2ob2o25b3o3b' +
+      '3o28b2ob2o$30bo19b3o3b3o17bo$30bo8bo22b3o6bo2b2o$30bo8bo14bo17b3o$39bo14bo5bo5bo5b3o$25b3o26bo5bo5bo4bo2b2o$60bo5bo9bo$23bo5bo42b2ob2o$23bo5bo32b3o$23bo5bo$9b2o57b3o$8bo2bo13b3o38bob3o$7bobobo53bobobo$6b3obo38b3o13bo2bo$6b3o57b2o$47bo5bo$12b3o10bo21bo5bo$2ob2o20bo21bo5bo$o9bo' +
+      '5bo8bo$b2o2bo4bo5bo32b3o$2b3o5bo5bo4b3o3b3o$2b3o28b3o10bo$b2o2bo6b3o10bo20bo$o24bo5bo5bo8bo$2ob2o20bo5bo5bo29b2ob2o$31bo5bo4b3o3b3o7bo12bo$58bo7bo2b2o$33b3o10bo11bo8b3o$21bo24bo20b3o$21bo24bo7b3o3b3o3bo2b2o$21bo49bo$58bo8b2ob2o$17b3o3b3o32bo$58bo3bobo$13b2o6bo43bo$12bo2bo5bo' +
+      '39bo2bo$12bobobo4bo23bo14bobobo$13bo2bo28bo14bo2bo$17bo26bobo14b2o$14bobo20b2o$21bo2bo11bo2bo$19bo2b2o2bo9bobobo$19bo2b2o2bo10bob3o$21b4o14b3o$19bobo2bobo$19b2o4b2o18bo2bo$43bo2b2o2bo$43bo2b2o2bo$45b4o$43bobo2bobo$43b2o4b2o!'
+  },
+  p48ToadHassler: {
+    x: 36,
+    y: 54,
+    enc:
+      '3b2o9b2o2b2o9b2o5b$4bo9bo4bo9bo6b$3bo11bo2bo11bo5b$3b2o9b2o2b2o9b2o5b$4bo4bo4bo4bo4bo4bo6b$b3ob9ob4ob9ob3o3b$o2bo3bobobo3bo2bo3bobobo3bo2bo2b$2o30b2o2b$6b2o3b2o8b2o3b2o8b2$4b2ob2ob2ob2o4b2ob2ob2ob2o6b$3bo5bo5bo2bo5bo5bo5b$3b2obo5bob2o2b2obo5bob2o5b2$9bo14bo11b2$16b2o18b$10bo4bo2bo4bo12b$10bo5b2o5bo12b$9bobo10bobo11b$10bo12bo12b$10bo12bo12b$27b2o' +
+      '7b$4b3o19bobo7b$4b3o19b2o8b$4b3o11bo13b3ob$b3o12bo2bo12b3ob$b3o12bo2bo12b3ob$b3o13bo11b3o4b$8b2o19b3o4b$7bobo19b3o4b$7b2o27b$12bo12bo10b$12bo12bo10b$11bobo10bobo9b$12bo5b2o5bo10b$12bo4bo2bo4bo10b$18b2o16b2$11bo14bo9b2$5b2obo5bob2o2b2obo5bob2o3b$5bo5bo5bo2bo5bo5bo3b$6b2ob2ob2ob2o4b2ob2ob2ob2o4b2$8b2o3b2o8b2o3b2o6b$2b2o30b2o$2bo2bo3bobobo3bo2bo3bobobo3bo2bo$3b3ob9ob4ob9ob3ob$6bo4bo4bo4bo4bo4bo4b$5b2o9b2o2b2o9b2o3b$5bo11bo2bo11bo3b$6bo9bo4bo9bo4b$5b2o9b2o2b2o9b2o!'
   }
 };
 
