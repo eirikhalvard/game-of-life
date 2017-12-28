@@ -25,6 +25,12 @@ let patterns = {
     y: 11,
     enc:
       'bo12bob$bo12bob$obo10bobo$bo12bob$bo12bob$2bo3b4o3bo2b$6b4o6b$2b4o4b4o2b2$4bo6bo4b$5b2o2b2o!'
+  },
+  pulsar: {
+    x: 13,
+    y: 13,
+    enc:
+      '2b3o3b3o2b2$o4bobo4bo$o4bobo4bo$o4bobo4bo$2b3o3b3o2b2$2b3o3b3o2b$o4bobo4bo$o4bobo4bo$o4bobo4bo2$2b3o3b3o!'
   }
 };
 
@@ -423,7 +429,7 @@ function runLengthDecoder(rle) {
     } else {
       s = i;
       i++;
-      while (rle[i] != 'b' && rle[i] != 'o') {
+      while (rle[i] != 'b' && rle[i] != 'o' && rle[i] != '$') {
         i++;
       }
       console.log(`rle.sub: ${rle.substring(s, i)}, s: ${s}, i: ${i}`);
@@ -432,13 +438,16 @@ function runLengthDecoder(rle) {
       if (rle[i] == 'b') {
         console.log(`i: ${i}, num: ${num}, b`);
         x += num;
-      } else {
+      } else if (rle[i] == 'o') {
         console.log(`i: ${i}, num: ${num}, o`);
         for (let j = 0; j < num; j++) {
           console.log(`[${x}, ${y}]`);
           locations.push([x, y]);
           x++;
         }
+      } else {
+        y += num;
+        x = 0;
       }
     }
   }
