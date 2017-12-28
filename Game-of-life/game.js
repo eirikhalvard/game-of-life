@@ -1,4 +1,4 @@
-const verbos = true;
+const verbos = false;
 const canvasWidth = 1024;
 const canvasHeight = 256;
 const smallScreen = 600;
@@ -251,7 +251,6 @@ function set3D() {
   generation = createGrid(width, height);
   randomizeGrid();
   renderCanvas();
-
   animate();
 }
 function set2D() {
@@ -267,7 +266,6 @@ function set2D() {
   generation = createGrid(width, height);
   randomizeGrid();
   renderCanvas();
-
   loop();
 }
 function setSize2D() {
@@ -280,6 +278,7 @@ function setSize2D() {
         winHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
     );
   }
+  setDisabledButtons();
 }
 function setSize3D() {
   width = floor(canvasWidth / resolution);
@@ -292,6 +291,7 @@ function setSize3D() {
         canvasHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
     );
   }
+  setDisabledButtons();
 }
 
 // CREATING A NEW GAME
@@ -331,10 +331,12 @@ function fillGrid(locations, start) {
   }
 
   for (let i = 0; i < locations.length; i++) {
-    console.log(
-      `-------\n  x: ${start.x + locations[i][0]}\n  y: ${start.y +
-        locations[i][1]}`
-    );
+    if (verbos) {
+      console.log(
+        `-------\n  x: ${start.x + locations[i][0]}\n  y: ${start.y +
+          locations[i][1]}`
+      );
+    }
 
     generation[start.x + locations[i][0]][start.y + locations[i][1]].value = 1;
     generation[start.x + locations[i][0]][
@@ -402,6 +404,21 @@ function initPatternButtons() {
 
     playBody.appendChild(col);
     col.appendChild(button);
+  }
+}
+function setDisabledButtons() {
+  let colList = document.getElementById('playBody').childNodes;
+  for (let i = 0; i < colList.length; i++) {
+    let btn = colList[i].firstChild;
+    if (patterns[i].x + 1 > width || patterns[i].y + 1 > height) {
+      if (!btn.classList.contains('disabled')) {
+        btn.classList.add('disabled');
+      }
+    } else {
+      if (btn.classList.contains('disabled')) {
+        btn.classList.remove('disabled');
+      }
+    }
   }
 }
 
