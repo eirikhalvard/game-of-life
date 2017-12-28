@@ -287,106 +287,6 @@ function randomizeGrid() {
     }
   }
 }
-function gosperGliderGun() {
-  const patternWidth = 36;
-  const patternHeight = 9;
-  let start = findStartLocation(patternWidth, patternHeight);
-  const locations = [
-    [0, 4],
-    [0, 5],
-    [1, 4],
-    [1, 5],
-    [10, 4],
-    [10, 5],
-    [10, 6],
-    [11, 3],
-    [11, 7],
-    [12, 2],
-    [12, 8],
-    [13, 2],
-    [13, 8],
-    [14, 5],
-    [15, 3],
-    [15, 7],
-    [16, 4],
-    [16, 5],
-    [16, 6],
-    [17, 5],
-    [20, 2],
-    [20, 3],
-    [20, 4],
-    [21, 2],
-    [21, 3],
-    [21, 4],
-    [22, 1],
-    [22, 5],
-    [24, 0],
-    [24, 1],
-    [24, 5],
-    [24, 6],
-    [34, 2],
-    [34, 3],
-    [35, 2],
-    [35, 3]
-  ];
-  fillGrid(locations, start);
-}
-function pulsar() {
-  const patternWidth = 15;
-  const patternHeight = 15;
-  let start = findStartLocation(patternWidth, patternHeight);
-  const locations = [
-    [1, 3],
-    [1, 4],
-    [1, 5],
-    [1, 9],
-    [1, 10],
-    [1, 11],
-    [3, 1],
-    [3, 6],
-    [3, 8],
-    [3, 13],
-    [4, 1],
-    [4, 6],
-    [4, 8],
-    [4, 13],
-    [5, 1],
-    [5, 6],
-    [5, 8],
-    [5, 13],
-    [6, 3],
-    [6, 4],
-    [6, 5],
-    [6, 9],
-    [6, 10],
-    [6, 11],
-    [8, 3],
-    [8, 4],
-    [8, 5],
-    [8, 9],
-    [8, 10],
-    [8, 11],
-    [9, 1],
-    [9, 6],
-    [9, 8],
-    [9, 13],
-    [10, 1],
-    [10, 6],
-    [10, 8],
-    [10, 13],
-    [11, 1],
-    [11, 6],
-    [11, 8],
-    [11, 13],
-    [13, 3],
-    [13, 4],
-    [13, 5],
-    [13, 9],
-    [13, 10],
-    [13, 11]
-  ];
-  fillGrid(locations, start);
-}
 function findStartLocation(patternWidth, patternHeight) {
   let startX = floor((width - patternWidth) / 2);
   let startY = floor((height - patternHeight) / 2);
@@ -421,15 +321,11 @@ function runLengthDecoder(rle) {
     let char = rle[i];
 
     if (char == '$') {
-      console.log(`i: ${i}, $`);
       y++;
       x = 0;
     } else if (char == 'b') {
-      console.log(`i: ${i}, b`);
       x++;
     } else if (char == 'o') {
-      console.log(`i: ${i}, o`);
-      console.log(`[${x}, ${y}]`);
       locations.push([x, y]);
       x++;
     } else {
@@ -438,16 +334,12 @@ function runLengthDecoder(rle) {
       while (rle[i] != 'b' && rle[i] != 'o' && rle[i] != '$') {
         i++;
       }
-      console.log(`rle.sub: ${rle.substring(s, i)}, s: ${s}, i: ${i}`);
       let num = parseInt(rle.substring(s, i));
 
       if (rle[i] == 'b') {
-        console.log(`i: ${i}, num: ${num}, b`);
         x += num;
       } else if (rle[i] == 'o') {
-        console.log(`i: ${i}, num: ${num}, o`);
         for (let j = 0; j < num; j++) {
-          console.log(`[${x}, ${y}]`);
           locations.push([x, y]);
           x++;
         }
@@ -459,13 +351,9 @@ function runLengthDecoder(rle) {
   }
   return locations;
 }
-function makePatternz(pattern) {
-  console.log('pattern is ' + pattern);
-  makePattern(pattern.x, pattern.y, pattern.enc);
-}
-function makePattern(patternWidth, patternHeight, encoded) {
-  let start = findStartLocation(patternWidth, patternHeight);
-  let locations = runLengthDecoder(encoded);
+function makePattern(pattern) {
+  let start = findStartLocation(pattern.x, pattern.y);
+  let locations = runLengthDecoder(pattern.enc);
   fillGrid(locations, start);
 }
 
