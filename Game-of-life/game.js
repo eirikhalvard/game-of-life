@@ -19,6 +19,14 @@ let is3D;
 let colorContainer;
 let colors;
 let colorId;
+let patterns = {
+  weekender: {
+    x: 16,
+    y: 11,
+    enc:
+      'bo12bob$bo12bob$obo10bobo$bo12bob$bo12bob$2bo3b4o3bo2b$6b4o6b$2b4o4b4o2b2$4bo6bo4b$5b2o2b2o!'
+  }
+};
 
 // SETUP
 function setup() {
@@ -267,7 +275,50 @@ function randomizeGrid() {
     }
   }
 }
-function gospelGliderGun() {}
+function gosperGliderGun() {
+  const patternWidth = 36;
+  const patternHeight = 9;
+  let start = findStartLocation(patternWidth, patternHeight);
+  const locations = [
+    [0, 4],
+    [0, 5],
+    [1, 4],
+    [1, 5],
+    [10, 4],
+    [10, 5],
+    [10, 6],
+    [11, 3],
+    [11, 7],
+    [12, 2],
+    [12, 8],
+    [13, 2],
+    [13, 8],
+    [14, 5],
+    [15, 3],
+    [15, 7],
+    [16, 4],
+    [16, 5],
+    [16, 6],
+    [17, 5],
+    [20, 2],
+    [20, 3],
+    [20, 4],
+    [21, 2],
+    [21, 3],
+    [21, 4],
+    [22, 1],
+    [22, 5],
+    [24, 0],
+    [24, 1],
+    [24, 5],
+    [24, 6],
+    [34, 2],
+    [34, 3],
+    [35, 2],
+    [35, 3]
+  ];
+  fillGrid(locations, start);
+}
 function pulsar() {
   const patternWidth = 15;
   const patternHeight = 15;
@@ -348,6 +399,59 @@ function fillGrid(locations, start) {
       start.y + locations[i][1]
     ].nextValue = 1;
   }
+}
+function runLengthDecoder(rle) {
+  let x = 0;
+  let y = 0;
+  let locations = [];
+  let s = 0;
+  for (let i = 0; i < rle.length - 1; i++) {
+    let char = rle[i];
+
+    if (char == '$') {
+      console.log(`i: ${i}, $`);
+      y++;
+      x = 0;
+    } else if (char == 'b') {
+      console.log(`i: ${i}, b`);
+      x++;
+    } else if (char == 'o') {
+      console.log(`i: ${i}, o`);
+      console.log(`[${x}, ${y}]`);
+      locations.push([x, y]);
+      x++;
+    } else {
+      s = i;
+      i++;
+      while (rle[i] != 'b' && rle[i] != 'o') {
+        i++;
+      }
+      console.log(`rle.sub: ${rle.substring(s, i)}, s: ${s}, i: ${i}`);
+      let num = parseInt(rle.substring(s, i));
+
+      if (rle[i] == 'b') {
+        console.log(`i: ${i}, num: ${num}, b`);
+        x += num;
+      } else {
+        console.log(`i: ${i}, num: ${num}, o`);
+        for (let j = 0; j < num; j++) {
+          console.log(`[${x}, ${y}]`);
+          locations.push([x, y]);
+          x++;
+        }
+      }
+    }
+  }
+  return locations;
+}
+function makePatternz(pattern) {
+  console.log('pattern is ' + pattern);
+  makePattern(pattern.x, pattern.y, pattern.enc);
+}
+function makePattern(patternWidth, patternHeight, encoded) {
+  let start = findStartLocation(patternWidth, patternHeight);
+  let locations = runLengthDecoder(encoded);
+  fillGrid(locations, start);
 }
 
 // ADVANCE TO NEXT GENERATION
