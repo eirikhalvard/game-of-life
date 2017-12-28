@@ -19,32 +19,37 @@ let is3D;
 let colorContainer;
 let colors;
 let colorId;
-let patterns = {
-  weekender: {
+let patterns = [
+  {
+    name: 'Weekender',
     x: 16,
     y: 11,
     enc:
       'bo12bob$bo12bob$obo10bobo$bo12bob$bo12bob$2bo3b4o3bo2b$6b4o6b$2b4o4b4o2b2$4bo6bo4b$5b2o2b2o!'
   },
-  pulsar: {
+  {
+    name: 'Pulsar',
     x: 13,
     y: 13,
     enc:
       '2b3o3b3o2b2$o4bobo4bo$o4bobo4bo$o4bobo4bo$2b3o3b3o2b2$2b3o3b3o2b$o4bobo4bo$o4bobo4bo$o4bobo4bo2$2b3o3b3o!'
   },
-  gosperGliderGun: {
+  {
+    name: 'Gosper Glider Gun',
     x: 36,
     y: 9,
     enc:
       '24bo11b$22bobo11b$12b2o6b2o12b2o$11bo3bo4b2o12b2o$2o8bo5bo3b2o14b$2o8bo3bob2o4bobo11b$10bo5bo7bo11b$11bo3bo20b$12b2o!'
   },
-  p44piHeptominoHassler: {
+  {
+    name: 'P44 pi-heptomino hassler',
     x: 31,
     y: 44,
     enc:
       '9b2o4b2o4b2o8b$8bo2bobo4bobo2bo7b$8b3o10b3o7b$11b2o6b2o10b$10bo2b6o2bo9b$10b2o8b2o9b12$2o12b3o12b2o$2o11bo3bo11b2o$13b2ob2o13b5$13b2ob2o13b$2o11bo3bo11b2o$2o12b3o12b2o12$10b2o8b2o9b$10bo2b6o2bo9b$11b2o6b2o10b$8b3o10b3o7b$8bo2bobo4bobo2bo7b$9b2o4b2o4b2o!'
   },
-  p200TrafficJam: {
+  {
+    name: 'P200 Traffic Jam',
     x: 77,
     y: 77,
     enc:
@@ -54,14 +59,15 @@ let patterns = {
       '5bo8bo$b2o2bo4bo5bo32b3o$2b3o5bo5bo4b3o3b3o$2b3o28b3o10bo$b2o2bo6b3o10bo20bo$o24bo5bo5bo8bo$2ob2o20bo5bo5bo29b2ob2o$31bo5bo4b3o3b3o7bo12bo$58bo7bo2b2o$33b3o10bo11bo8b3o$21bo24bo20b3o$21bo24bo7b3o3b3o3bo2b2o$21bo49bo$58bo8b2ob2o$17b3o3b3o32bo$58bo3bobo$13b2o6bo43bo$12bo2bo5bo' +
       '39bo2bo$12bobobo4bo23bo14bobobo$13bo2bo28bo14bo2bo$17bo26bobo14b2o$14bobo20b2o$21bo2bo11bo2bo$19bo2b2o2bo9bobobo$19bo2b2o2bo10bob3o$21b4o14b3o$19bobo2bobo$19b2o4b2o18bo2bo$43bo2b2o2bo$43bo2b2o2bo$45b4o$43bobo2bobo$43b2o4b2o!'
   },
-  p48ToadHassler: {
+  {
+    name: 'P48 Toad Hassler',
     x: 36,
     y: 54,
     enc:
       '3b2o9b2o2b2o9b2o5b$4bo9bo4bo9bo6b$3bo11bo2bo11bo5b$3b2o9b2o2b2o9b2o5b$4bo4bo4bo4bo4bo4bo6b$b3ob9ob4ob9ob3o3b$o2bo3bobobo3bo2bo3bobobo3bo2bo2b$2o30b2o2b$6b2o3b2o8b2o3b2o8b2$4b2ob2ob2ob2o4b2ob2ob2ob2o6b$3bo5bo5bo2bo5bo5bo5b$3b2obo5bob2o2b2obo5bob2o5b2$9bo14bo11b2$16b2o18b$10bo4bo2bo4bo12b$10bo5b2o5bo12b$9bobo10bobo11b$10bo12bo12b$10bo12bo12b$27b2o' +
       '7b$4b3o19bobo7b$4b3o19b2o8b$4b3o11bo13b3ob$b3o12bo2bo12b3ob$b3o12bo2bo12b3ob$b3o13bo11b3o4b$8b2o19b3o4b$7bobo19b3o4b$7b2o27b$12bo12bo10b$12bo12bo10b$11bobo10bobo9b$12bo5b2o5bo10b$12bo4bo2bo4bo10b$18b2o16b2$11bo14bo9b2$5b2obo5bob2o2b2obo5bob2o3b$5bo5bo5bo2bo5bo5bo3b$6b2ob2ob2ob2o4b2ob2ob2ob2o4b2$8b2o3b2o8b2o3b2o6b$2b2o30b2o$2bo2bo3bobobo3bo2bo3bobobo3bo2bo$3b3ob9ob4ob9ob3ob$6bo4bo4bo4bo4bo4bo4b$5b2o9b2o2b2o9b2o3b$5bo11bo2bo11bo3b$6bo9bo4bo9bo4b$5b2o9b2o2b2o9b2o!'
   }
-};
+];
 
 // SETUP
 function setup() {
@@ -75,6 +81,7 @@ function setup() {
   addEventHandlers();
   initColors();
   makeColorSection();
+  initPatternButtons();
   colorId = 0;
   setColor(0);
   resetStats();
@@ -378,6 +385,24 @@ function makePattern(pattern) {
   let start = findStartLocation(pattern.x, pattern.y);
   let locations = runLengthDecoder(pattern.enc);
   fillGrid(locations, start);
+}
+function initPatternButtons() {
+  let playBody = document.getElementById('playBody');
+  for (let i = 0; i < patterns.length; i++) {
+    let col = document.createElement('div');
+    col.className = 'col l6';
+
+    let button = document.createElement('a');
+    button.className = 'waves-effect waves-light btn truncate btn-wrap';
+    button.innerText = patterns[i].name;
+    button.title = patterns[i].name;
+    button.onclick = function() {
+      makePattern(patterns[i]);
+    };
+
+    playBody.appendChild(col);
+    col.appendChild(button);
+  }
 }
 
 // ADVANCE TO NEXT GENERATION

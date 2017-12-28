@@ -17,6 +17,20 @@
     <div class="col s12 m6 l6">
       <ul class="collapsible" data-collapsible="accordion">
         <li>
+          <div class="collapsible-header"><i class="material-icons">play_circle_filled</i>Play</div>
+          <div class="collapsible-body">
+            <!-- Play Content Start -->
+            <div id="playBody" class="row">
+              <div class="col l6">
+                <a id="randomize" class="waves-effect waves-light btn truncate btn-wrap"><i class="material-icons left">shuffle</i>Randomize</a>
+                <a id="randomize" class="waves-effect waves-light btn truncate btn-wrap">Randomize</a>
+              </div>
+
+            </div>
+            <!-- Play Content End -->
+          </div>
+        </li>
+        <li>
           <div class="collapsible-header active"><i class="material-icons">build</i>Settings</div>
           <div class="collapsible-body">
             <div class="row">
@@ -42,28 +56,24 @@
               <div class="col s6 m6 l3">
                 <h5>Dimension: </h5>
                 <div class="switch">
-                <label>
-                  2D
-                  <input type="checkbox" checked="true" id="dimensionInput">
-                  <span class="lever"></span>
-                  3D
-                </label>
-              </div>
+                  <label>
+                    2D
+                    <input type="checkbox" checked="true" id="dimensionInput">
+                    <span class="lever"></span>
+                    3D
+                  </label>
+                </div>
               </div>
 
               <!-- Resolution -->
               <div class="col s12 m12 l6">
                 <h5>Resolution:</h5>
                 <div>
-                  <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Lower</a>
-                  <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Higher</a>
+                  <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_up</i>Higher</a>
+                  <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_down</i>Lower</a>
                 </div>
               </div>
 
-              <!-- New game -->
-              <div class="col s12 m12 l6">
-                <a id="randomize" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Randomize</a>
-              </div>
 
             </div>
             <!-- Settings Content End -->

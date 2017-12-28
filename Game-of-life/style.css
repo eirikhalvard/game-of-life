@@ -19,3 +19,8 @@
   height: 30px;
   display: inline-block;
 }
+
+.btn-wrap {
+  width: -webkit-fill-available;
+  margin: 10px 0;
+}
