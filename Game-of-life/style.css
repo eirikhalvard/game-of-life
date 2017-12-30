@@ -24,3 +24,9 @@
   width: -webkit-fill-available;
   margin: 10px 0;
 }
+
+h3 {
+  margin: 0px 20px;
+  text-align: center;
+  font-family: 'Spectral SC', serif;
+}
