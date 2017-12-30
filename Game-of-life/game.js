@@ -2,6 +2,7 @@ const verbos = false;
 const canvasWidth = 1024;
 const canvasHeight = 256;
 const smallScreen = 600;
+const cameraZoom = 80;
 let resolution = 16;
 let winWidth, winHeight, width, height, numCells;
 let resolution2D, resolution3D;
@@ -244,7 +245,12 @@ function setResolution() {
 }
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(75, winWidth / winHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(
+    cameraZoom,
+    winWidth / winHeight,
+    0.1,
+    1000
+  );
   renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(winWidth, winHeight);
   document.getElementById('canvasPlacement').appendChild(renderer.domElement);
@@ -255,7 +261,7 @@ function init() {
   material = new THREE.MeshBasicMaterial({ map: texture });
   torus = new THREE.Mesh(geometry, material);
   scene.add(torus);
-  camera.position.z = 75 * 500 / winWidth;
+  camera.position.z = cameraZoom * 500 / winWidth;
 
   // controls
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -273,8 +279,8 @@ function animate() {
     }
     id = requestAnimationFrame(animate);
     texture.needsUpdate = true;
-    // torus.rotation.x += 0.01;
-    // torus.rotation.y += 0.01;
+    torus.rotation.x += 0.01;
+    torus.rotation.y += 0.01;
     renderer.render(scene, camera);
   }
 }
@@ -540,14 +546,18 @@ function setNewSize() {
       ? window.innerHeight
       : window.innerHeight / 2;
 
-  if (is3D) {
-    camera = new THREE.PerspectiveCamera(75, winWidth / winHeight, 0.1, 1000);
-    renderer.setSize(winWidth, winHeight);
-    camera.position.z = 75 * 500 / winWidth;
-    let controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 1, 0);
-    controls.update();
-  } else {
+  camera = new THREE.PerspectiveCamera(
+    cameraZoom,
+    winWidth / winHeight,
+    0.1,
+    1000
+  );
+  renderer.setSize(winWidth, winHeight);
+  camera.position.z = cameraZoom * 500 / winWidth;
+  let controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 1, 0);
+  controls.update();
+  if (!is3D) {
     setSize2D();
     resizeCanvas(width * resolution, height * resolution);
     generation = createGrid(width, height);
@@ -621,4 +631,21 @@ function setColor(id) {
   colorId = id;
   // colorContainer.childNodes[colorId].classList.remove('z-depth-1');
   colorContainer.childNodes[colorId].classList.add('z-depth-3');
+}
+function setColorTest(id) {
+  if (id == 0) {
+    colorId = 3;
+    $('.bg-color').css('background-color', '#011a27');
+    $('.primary-color').css('background-color', '#f0810f');
+    $('.secondary-color').css('background-color', '#e6df44');
+    $('.light-text-color').css('color', '#efefef');
+    $('.dark-text-color').css('color', '#333333');
+  } else if (id == 1) {
+    colorId = 2;
+    $('.bg-color').css('background-color', '#2f496e');
+    $('.primary-color').css('background-color', '#2988bc');
+    $('.secondary-color').css('background-color', '#ed8c72');
+    $('.light-text-color').css('color', '#f4eade');
+    $('.dark-text-color').css('color', '#333333');
+  }
 }
