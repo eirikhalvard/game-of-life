@@ -40,35 +40,35 @@ h6 {
 }
 
 .bg-color {
-  background-color: #011a27;
+  background-color: #2f496e;
 }
 
 .primary-color {
-  background-color: #f0810f;
+  background-color: #2988bc;
 }
 
 .secondary-color {
-  background-color: #e6df44;
+  background-color: #ed8c72;
 }
 
 .primary-text-color {
-  color: #f0810f;
+  color: #2988bc;
 }
 
 .secondary-text-color {
-  color: #e6df44;
+  color: #ed8c72;
 }
 
 .light-color {
-  color: #efefef;
+  background-color: #f4eade;
 }
 
 .dark-color {
-  color: #333333;
+  background-color: #333333;
 }
 
 .light-text-color {
-  color: #efefef;
+  color: #f4eade;
 }
 
 .dark-text-color {
@@ -76,9 +76,9 @@ h6 {
 }
 
 .collapse-border-color {
-  border-top: 1px solid #efefef;
-  border-right: 1px solid #efefef;
-  border-left: 1px solid #efefef;
+  border-top: 1px solid #f4eade;
+  border-right: 1px solid #f4eade;
+  border-left: 1px solid #f4eade;
   margin-left: 1rem;
   margin-right: 1rem;
 }

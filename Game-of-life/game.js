@@ -134,7 +134,7 @@ function setup() {
   makeColorSection();
   initPatternButtons();
   colorId = 0;
-  setColorTest(1);
+  setColor(0);
   resetStats();
   noLoop();
   is3D = true;
@@ -571,6 +571,11 @@ function setNewSize() {
 function initColors() {
   colors = [
     {
+      alive: color(244, 234, 222),
+      death: color(41, 136, 188),
+      stroke: color(47, 73, 110)
+    },
+    {
       alive: color(21, 135, 10),
       death: color(204, 24, 24),
       stroke: color(50, 50, 50)
@@ -599,11 +604,6 @@ function initColors() {
       alive: color(25, 149, 173),
       death: color(241, 241, 242),
       stroke: color(161, 214, 226)
-    },
-    {
-      alive: color(244, 234, 222),
-      death: color(41, 136, 188),
-      stroke: color(47, 73, 110)
     }
   ];
 }
@@ -639,39 +639,4 @@ function setColor(id) {
   colorId = id;
   // colorContainer.childNodes[colorId].classList.remove('z-depth-1');
   colorContainer.childNodes[colorId].classList.add('z-depth-3');
-}
-function setColorTest(id) {
-  if (id == 0) {
-    colorId = 3;
-    $('.bg-color').css('background-color', '#011a27');
-    $('.primary-color').css('background-color', '#f0810f');
-    $('.secondary-color').css('background-color', '#e6df44');
-
-    $('.primary-text-color').css('color', '#f0810f');
-    $('.secondary-text-color').css('color', '#e6df44');
-
-    $('.light-color').css('background-color', '#efefef');
-    $('.dark-color').css('background-color', '#333333');
-    $('.light-text-color').css('color', '#efefef');
-    $('.dark-text-color').css('color', '#333333');
-    $('.collapse-border-color').css('border-top', '1px solid #efefef');
-    $('.collapse-border-color').css('border-right', '1px solid #efefef');
-    $('.collapse-border-color').css('border-left', '1px solid #efefef');
-  } else if (id == 1) {
-    colorId = 6;
-    $('.bg-color').css('background-color', '#2f496e');
-    $('.primary-color').css('background-color', '#2988bc');
-    $('.secondary-color').css('background-color', '#ed8c72');
-
-    $('.primary-text-color').css('color', '#2988bc');
-    $('.secondary-text-color').css('color', '#ed8c72');
-
-    $('.light-color').css('background-color', '#f4eade');
-    $('.dark-color').css('background-color', '#333333');
-    $('.light-text-color').css('color', '#f4eade');
-    $('.dark-text-color').css('color', '#333333');
-    $('.collapse-border-color').css('border-top', '1px solid #f4eade');
-    $('.collapse-border-color').css('border-right', '1px solid #f4eade');
-    $('.collapse-border-color').css('border-left', '1px solid #f4eade');
-  }
 }
