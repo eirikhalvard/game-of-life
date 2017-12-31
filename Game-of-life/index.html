@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="overrides.scss">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
-  <link rel="StyleSheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
   <meta charset="utf-8">
   <title>Game of Life</title>
@@ -17,13 +18,13 @@
       <h3>Game of Life</h3>
     </div>
     <div class="col s12 m6 l6">
-      <ul class="collapsible" data-collapsible="accordion">
+      <ul class="collapsible collapse-border-color" data-collapsible="accordion">
         <li>
-          <div class="collapsible-header secondary-color dark-text-color"><i class="material-icons">play_circle_filled</i>Play</div>
+          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">play_circle_filled</i>Play</div>
           <div class="collapsible-body">
             <!-- Play Content Start -->
             <div class="row">
-              <div class="col s6 m12 l6">
+              <div class="col s12 m12 l6">
                 <a id="randomize" class="waves-effect waves-light btn truncate btn-wrap">Randomize</a>
               </div>
               <div id="playBody"></div>
@@ -32,7 +33,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header secondary-color dark-text-color active"><i class="material-icons">build</i>Settings</div>
+          <div class="collapsible-header light-color dark-text-color active"><i class="material-icons">build</i>Settings</div>
           <div class="collapsible-body">
             <div class="row">
 
@@ -81,7 +82,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header secondary-color dark-text-color"><i class="material-icons">info</i>About</div>
+          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">info</i>About</div>
           <div class="collapsible-body">
             <!-- About Content Start -->
             <p class="flow-text">
@@ -101,7 +102,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header secondary-color dark-text-color"><i class="material-icons">insert_chart</i>Stats</div>
+          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">insert_chart</i>Stats</div>
           <div class="collapsible-body">
             <!-- Stats Content Start -->
             <h5>Generations: <span id="genCount">Livet</span></h5>

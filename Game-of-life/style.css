@@ -50,10 +50,24 @@ h6 {
   background-color: #e6df44;
 }
 
+.light-color {
+  color: #efefef;
+}
+
+.dark-color {
+  color: #333333;
+}
+
 .light-text-color {
   color: #efefef;
 }
 
 .dark-text-color {
   color: #333333;
+}
+
+.collapse-border-color {
+  border-top: 1px solid #efefef;
+  border-right: 1px solid #efefef;
+  border-left: 1px solid #efefef;
 }
