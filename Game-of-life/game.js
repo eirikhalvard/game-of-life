@@ -133,7 +133,7 @@ function setup() {
   makeColorSection();
   initPatternButtons();
   colorId = 0;
-  setColor(0);
+  setColorTest(1);
   resetStats();
   noLoop();
   is3D = true;
@@ -596,6 +596,11 @@ function initColors() {
       alive: color(25, 149, 173),
       death: color(241, 241, 242),
       stroke: color(161, 214, 226)
+    },
+    {
+      alive: color(41, 136, 188),
+      death: color(244, 234, 222),
+      stroke: color(47, 73, 110)
     }
   ];
 }
@@ -638,6 +643,10 @@ function setColorTest(id) {
     $('.bg-color').css('background-color', '#011a27');
     $('.primary-color').css('background-color', '#f0810f');
     $('.secondary-color').css('background-color', '#e6df44');
+
+    $('.primary-text-color').css('color', '#f0810f');
+    $('.secondary-text-color').css('color', '#e6df44');
+
     $('.light-color').css('background-color', '#efefef');
     $('.dark-color').css('background-color', '#333333');
     $('.light-text-color').css('color', '#efefef');
@@ -646,10 +655,14 @@ function setColorTest(id) {
     $('.collapse-border-color').css('border-right', '1px solid #efefef');
     $('.collapse-border-color').css('border-left', '1px solid #efefef');
   } else if (id == 1) {
-    colorId = 2;
+    colorId = 6;
     $('.bg-color').css('background-color', '#2f496e');
     $('.primary-color').css('background-color', '#2988bc');
     $('.secondary-color').css('background-color', '#ed8c72');
+
+    $('.primary-text-color').css('color', '#2988bc');
+    $('.secondary-text-color').css('color', '#ed8c72');
+
     $('.light-color').css('background-color', '#f4eade');
     $('.dark-color').css('background-color', '#333333');
     $('.light-text-color').css('color', '#f4eade');

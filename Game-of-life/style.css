@@ -50,6 +50,14 @@ h6 {
   background-color: #e6df44;
 }
 
+.primary-text-color {
+  color: #f0810f;
+}
+
+.secondary-text-color {
+  color: #e6df44;
+}
+
 .light-color {
   color: #efefef;
 }
@@ -70,4 +78,10 @@ h6 {
   border-top: 1px solid #efefef;
   border-right: 1px solid #efefef;
   border-left: 1px solid #efefef;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+h5 {
+  font-family: 'Raleway', sans-serif;
 }
