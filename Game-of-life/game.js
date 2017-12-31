@@ -128,6 +128,7 @@ function setup() {
       ? window.innerHeight
       : window.innerHeight / 2;
 
+  $('.scrollable').css('height', winHeight - 20);
   addEventHandlers();
   initColors();
   makeColorSection();
@@ -546,6 +547,8 @@ function setNewSize() {
       ? window.innerHeight
       : window.innerHeight / 2;
 
+  $('.scrollable').css('height', winHeight - 20);
+
   camera = new THREE.PerspectiveCamera(
     cameraZoom,
     winWidth / winHeight,
@@ -598,8 +601,8 @@ function initColors() {
       stroke: color(161, 214, 226)
     },
     {
-      alive: color(41, 136, 188),
-      death: color(244, 234, 222),
+      alive: color(244, 234, 222),
+      death: color(41, 136, 188),
       stroke: color(47, 73, 110)
     }
   ];

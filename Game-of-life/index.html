@@ -11,118 +11,121 @@
   <title>Game of Life</title>
 </head>
 <body class="bg-color light-text-color">
-  <div class="row">
+  <div class="row" style="margin-bottom: 0px">
     <div class="col s12 m6 l6" id="canvasPlacement"></div>
-    <div class="col s12 m6 l6">
-      <h6>Conway's</h3>
-      <h3 class="secondary-text-color">Game of Life</h3>
-    </div>
-    <div class="col s12 m6 l6">
-      <ul class="collapsible collapse-border-color" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">play_circle_filled</i>Play</div>
-          <div class="collapsible-body">
-            <!-- Play Content Start -->
-            <div class="row">
-              <div class="col s12 m12 l6">
-                <a id="randomize" class="waves-effect waves-light btn truncate btn-wrap my-btn">Randomize</a>
-              </div>
-              <div id="playBody"></div>
-            </div>
-            <!-- Play Content End -->
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header light-color dark-text-color active"><i class="material-icons">build</i>Settings</div>
-          <div class="collapsible-body">
-            <div class="row">
+    <div class="scrollable col s12 m6 l6">
 
-              <!-- Settings Content Start -->
-              <!-- Colors -->
-              <div class="col s12 m12 l6">
-                <h5>Choose color: </h5>
-                <div class="color-container" id="colorContainer"></div>
-              </div>
-
-              <!-- Speed -->
-              <div class="col s12 m12 l6">
-                <form action="#">
-                  <p class="range-field">
-                    <h5><i class="material-icons">access_time</i> Speed</h5>
-                    <input type="range" id="fps-range" min="1" max="60" />
-                  </p>
-                </form>
-              </div>
-
-              <!-- Dimension switch -->
-              <div class="col s6 m6 l3">
-                <h5>Dimension: </h5>
-                <div class="switch">
-                  <label>
-                    2D
-                    <input type="checkbox" checked="true" id="dimensionInput">
-                    <span class="lever"></span>
-                    3D
-                  </label>
+      <div class="header-div">
+        <h6>Conway's</h3>
+          <h3 class="secondary-text-color">Game of Life</h3>
+        </div>
+        <div class="">
+          <ul class="collapsible collapse-border-color" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header light-color primary-text-color"><i class="material-icons">play_circle_filled</i>Play</div>
+              <div class="collapsible-body">
+                <!-- Play Content Start -->
+                <div class="row">
+                  <div class="col s12 m12 l6">
+                    <a id="randomize" class="waves-effect waves-light btn truncate btn-wrap my-btn">Randomize</a>
+                  </div>
+                  <div id="playBody"></div>
                 </div>
+                <!-- Play Content End -->
               </div>
+            </li>
+            <li>
+              <div class="collapsible-header light-color primary-text-color active"><i class="material-icons">build</i>Settings</div>
+              <div class="collapsible-body">
+                <div class="row">
 
-              <!-- Resolution -->
-              <div class="col s12 m12 l6">
-                <h5>Resolution:</h5>
-                <div>
-                  <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_up</i>Higher</a>
-                  <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_down</i>Lower</a>
+                  <!-- Settings Content Start -->
+                  <!-- Colors -->
+                  <div class="col s12 m12 l6">
+                    <h5>Choose color: </h5>
+                    <div class="color-container" id="colorContainer"></div>
+                  </div>
+
+                  <!-- Speed -->
+                  <div class="col s12 m12 l6">
+                    <form action="#">
+                      <p class="range-field">
+                        <h5><i class="material-icons">access_time</i> Speed</h5>
+                        <input type="range" id="fps-range" min="1" max="60" />
+                      </p>
+                    </form>
+                  </div>
+
+                  <!-- Dimension switch -->
+                  <div class="col s6 m6 l3">
+                    <h5>Dimension: </h5>
+                    <div class="switch">
+                      <label>
+                        2D
+                        <input type="checkbox" checked="true" id="dimensionInput">
+                        <span class="lever"></span>
+                        3D
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Resolution -->
+                  <div class="col s12 m12 l6">
+                    <h5>Resolution:</h5>
+                    <div>
+                      <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_up</i>Higher</a>
+                      <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_down</i>Lower</a>
+                    </div>
+                  </div>
+
+
                 </div>
+                <!-- Settings Content End -->
               </div>
+            </li>
+            <li>
+              <div class="collapsible-header light-color primary-text-color"><i class="material-icons">info</i>About</div>
+              <div class="collapsible-body">
+                <!-- About Content Start -->
+                <p class="flow-text">
+                  Game of Life is a cellular automata created by John Conway.
 
+                  The "game" consists of a 2D grid of cells, where each cell is eather alive or dead.
+                  To determine if a cell lives or dies the next generation, we have to look at
+                  it's eight neighbours. If the cell is dead, and it has three alive neighbours, it will
+                  be born next generation. If a alive cell has anything else than two or three neighbours,
+                  it will die next generation.
 
-            </div>
-            <!-- Settings Content End -->
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">info</i>About</div>
-          <div class="collapsible-body">
-            <!-- About Content Start -->
-            <p class="flow-text">
-              Game of Life is a cellular automata created by John Conway.
-
-              The "game" consists of a 2D grid of cells, where each cell is eather alive or dead.
-              To determine if a cell lives or dies the next generation, we have to look at
-              it's eight neighbours. If the cell is dead, and it has three alive neighbours, it will
-              be born next generation. If a alive cell has anything else than two or three neighbours,
-              it will die next generation.
-
-              The 2D grid is also infinite, meaning if you reach the end of the board,
-              you will be "teleported" to the other side of the board, like pacman. This fact
-              makes it natural to fold the 2D canvas into a Torus(donut-shape).
-            </p>
-            <!-- About Content End -->
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header light-color dark-text-color"><i class="material-icons">insert_chart</i>Stats</div>
-          <div class="collapsible-body">
-            <!-- Stats Content Start -->
-            <h5>Generations: <span id="genCount">Livet</span></h5>
-            <h5>Deaths: <span id="deathCount">Livet</span></h5>
-            <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
-            <!-- Stats Content End -->
-          </div>
-        </li>
-      </ul>
+                  The 2D grid is also infinite, meaning if you reach the end of the board,
+                  you will be "teleported" to the other side of the board, like pacman. This fact
+                  makes it natural to fold the 2D canvas into a Torus(donut-shape).
+                </p>
+                <!-- About Content End -->
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header light-color primary-text-color"><i class="material-icons">insert_chart</i>Stats</div>
+              <div class="collapsible-body">
+                <!-- Stats Content Start -->
+                <h5>Generations: <span id="genCount">Livet</span></h5>
+                <h5>Deaths: <span id="deathCount">Livet</span></h5>
+                <h5>Deaths / Generation: <span id="deathPerGen">Livet</span></h5>
+                <!-- Stats Content End -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
 
 
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script src="game.js" charset="utf-8"></script>
-  <script src="OrbitControls.js" charset="utf-8"></script>
-</body>
-</html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="game.js" charset="utf-8"></script>
+    <script src="OrbitControls.js" charset="utf-8"></script>
+  </body>
+  </html>
