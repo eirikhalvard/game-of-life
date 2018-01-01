@@ -177,6 +177,7 @@ function addEventHandlers() {
   document.getElementById('dimensionInput').onchange = function() {
     if (this.checked) {
       set3D();
+      animate();
     } else {
       set2D();
     }
@@ -307,7 +308,6 @@ function set3D() {
   generation = createGrid(width, height);
   randomizeGrid();
   renderCanvas();
-  animate();
 }
 function set2D() {
   cancelAnimationFrame(id);
@@ -573,6 +573,11 @@ function initColors() {
     {
       alive: color(244, 234, 222),
       death: color(41, 136, 188),
+      stroke: color(47, 73, 110)
+    },
+    {
+      alive: color(41, 136, 188),
+      death: color(244, 234, 222),
       stroke: color(47, 73, 110)
     },
     {
