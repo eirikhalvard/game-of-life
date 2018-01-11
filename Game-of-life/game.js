@@ -116,6 +116,21 @@ let patterns = [
       '21b2o42b$20bo2bo41b$17bo3bobo41b$15b6obo42b$14bo5bo44b$14bob2obo2bo42b$15bo3bob2o42b$17bobo45b$16b2o3b2o42b$15bo2b2obo43b$13bo2bo3bo2bo9bo31b$13b2obo3bob2o7b3o31b$14bobob2obo8bo34b$14bob3o2bo8b2o33b$15bo3bob2o42b$16b4o2bo5bo36b$20bo6bobo35b$16b4o2bo5b2o2b2o31b$16bo2bob2o9b2o' +
       '31b$21bo43b$19bobo31b2o10b$19b2o6bo23b3o5b2o4b$25b2o23bo4bo2bo2bo3b$26b2o18b2obob4obo2bobo3b$10b2o5b2o28bobobo4b2obob2o2b$11bo5b2o28bobob2o2bo5bo3b$11bobo29b2ob2ob2obo2bob3obo3b$12b2o29bo4bo4b2o5b2obob$16b2o26b3o3b3o2b2obo3bobo$15bobo20b2o6b2ob2o2bo2bob2obo2bo$16bo20b2o14b2o7b2ob$39bo25b2$25bo39b$b2o7b2o14b2o20bo16b$o2bob2obo2bo2b2ob2o6b2o20bobo15b$obo3bob2o2b3o3b3o26b2o16b$bob2o5b2o4bo4bo29b2o12b$3bob3obo2bob2ob' +
       '2ob2o29bobo11b$3bo5bo2b2obobo28b2o5bo11b$2b2obob2o4bobobo28b2o5b2o10b$3bobo2bob4obob2o18b2o26b$3bo2bo2bo4bo23b2o25b$4b2o5b3o23bo6b2o19b$10b2o31bobo19b$43bo21b$31b2o9b2obo2bo16b$31b2o2b2o5bo2b4o16b$35bobo6bo20b$36bo5bo2b4o16b$42b2obo3bo15b$33b2o8bo2b3obo14b$34bo8bob2obobo14b$31b3o7b2obo3bob2o13b$31bo9bo2bo3bo2bo13b$43bob2o2bo15b$42b2o3b2o16b$45bobo17b$42b2obo3bo15b$42bo2bob2obo14b$44bo5bo14b$42bob6o15b$41bobo3bo17b$41bo2bo20b$42b2o!'
+  },
+  {
+    name: 'slightly smaller pop-201 sawtooth',
+    x: 55,
+    y: 79,
+    enc:
+      '49b2o$49b2o2$23b2o5b2o$23b2o5b2o5$43bo5bo$42b3o3b3o$41b2obo3bob2o3$23bo7bo12bo3bo$22bo2bo3bo2bo11bo3bo$26bobo$26bobo$26bobo$22bo2bo3bo2bo$23b3o3b3o7$43bo$43bobo$43b2o$30b2o$30b2o2$10b2o$8b2ob2o8bobo$8bo2bo10b' +
+      'o$8bo2bo$9b2o33b2obo3bob2o$32bo11bo2bo3bo2bo$9b2o20bo13b3o3b3o$8bo2bo19b3o$2o6bo2bo$2o6b2ob2o$10b2o9bobo$21b2o$22bo2$45b2o$45b2o2$20bo$20bobo$20b2o2$25b2o$25b2o$6b4o15b2o$4b2o4b2o13bo$4b2o5bo12bobo$6b2obobo12bob2o$11bo$7bo3bo$7bo4bo12b2o$9b3o3bo9b2o$9b2o4bo$15b2o$17bo$17b3o3$20bo$19bob5o$18b2o5bo$18b2o3bo2bo$26bo$20b2obo2bo$23bo2bo$24b2o$24b2o!'
+  },
+  {
+    name: 'Pi portraitor',
+    x: 24,
+    y: 24,
+    enc:
+      '11b2o11b$6b2obo4bob2o6b$6bo10bo6b$7b2o6b2o7b$4b3o2b6o2b3o4b$4bo2bo8bo2bo4b$b2obobo10bobob2ob$bobobo12bobobob$3bo16bo3b$bo2bo14bo2bob$4bo7b3o4bo4b$o3bo7bobo4bo3bo$o3bo7bobo4bo3bo$4bo14bo4b$bo2bo14bo2bob$3bo16bo3b$bobobo12bobobob$b2obobo10bobob2ob$4bo2bo8bo2bo4b$4b3o2b6o2b3o4b$7b2o6b2o7b$6bo10bo6b$6b2obo4bob2o6b$11b2o!'
   }
 ];
 
@@ -620,19 +635,22 @@ function makeColorSection() {
     box.onclick = function() {
       setColor(i);
     };
-    box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${colors[i]
-      .stroke.levels[1]}, ${colors[i].stroke.levels[2]})`;
+    box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${
+      colors[i].stroke.levels[1]
+    }, ${colors[i].stroke.levels[2]})`;
 
     let alive = document.createElement('div');
     alive.classList.add('color-part');
-    alive.style.backgroundColor = `rgb(${colors[i].alive.levels[0]}, ${colors[i]
-      .alive.levels[1]}, ${colors[i].alive.levels[2]})`;
+    alive.style.backgroundColor = `rgb(${colors[i].alive.levels[0]}, ${
+      colors[i].alive.levels[1]
+    }, ${colors[i].alive.levels[2]})`;
     box.appendChild(alive);
 
     let death = document.createElement('div');
     death.classList.add('color-part');
-    death.style.backgroundColor = `rgb(${colors[i].death.levels[0]}, ${colors[i]
-      .death.levels[1]}, ${colors[i].death.levels[2]})`;
+    death.style.backgroundColor = `rgb(${colors[i].death.levels[0]}, ${
+      colors[i].death.levels[1]
+    }, ${colors[i].death.levels[2]})`;
     box.appendChild(death);
 
     colorContainer.appendChild(box);

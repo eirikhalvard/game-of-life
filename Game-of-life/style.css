@@ -92,3 +92,11 @@ h5 {
   height: 100%;
   overflow-y: auto;
 }
+
+.marg {
+  margin-bottom: 20px;
+}
+
+.padding-zero {
+  padding: 0px;
+}

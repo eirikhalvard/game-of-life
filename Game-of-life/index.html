@@ -38,17 +38,11 @@
             <li>
               <div class="collapsible-header light-color primary-text-color active"><i class="material-icons">build</i>Settings</div>
               <div class="collapsible-body">
-                <div class="row">
-
+                <div class="row center-align">
                   <!-- Settings Content Start -->
-                  <!-- Colors -->
-                  <div class="col s12 m12 l6">
-                    <h5>Choose color: </h5>
-                    <div class="color-container" id="colorContainer"></div>
-                  </div>
 
                   <!-- Speed -->
-                  <div class="col s12 m12 l6">
+                  <div class="col s12 m12 l12">
                     <form action="#">
                       <p class="range-field">
                         <h5><i class="material-icons">access_time</i> Speed</h5>
@@ -57,9 +51,15 @@
                     </form>
                   </div>
 
+                  <!-- Colors -->
+                  <div class="col s12 m12 l6 marg">
+                    <h5>Choose color</h5>
+                    <div class="color-container" id="colorContainer"></div>
+                  </div>
+
                   <!-- Dimension switch -->
-                  <div class="col s6 m6 l3">
-                    <h5>Dimension: </h5>
+                  <div class="col s12 m12 l6 marg">
+                    <h5>Dimension</h5>
                     <div class="switch">
                       <label>
                         2D
@@ -72,10 +72,14 @@
 
                   <!-- Resolution -->
                   <div class="col s12 m12 l6">
-                    <h5>Resolution:</h5>
-                    <div>
-                      <a id="higherResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_up</i>Higher</a>
-                      <a id="lowerResolution" class="waves-effect waves-light btn"><i class="material-icons left">keyboard_arrow_down</i>Lower</a>
+                    <h5>Resolution</h5>
+                    <div class="row padding-zero">
+                      <div class="col s12 m12 l12">
+                        <a id="higherResolution" class="waves-effect waves-light btn btn-wrap"><i class="material-icons left">keyboard_arrow_up</i>Higher</a>
+                      </div>
+                      <div class="col s12 m12 l12">
+                        <a id="lowerResolution" class="waves-effect waves-light btn btn-wrap"><i class="material-icons left">keyboard_arrow_down</i>Lower</a>
+                      </div>
                     </div>
                   </div>
 
