@@ -196,7 +196,8 @@ function addEventHandlers() {
     } else {
       set2D();
     }
-      if (numCells > maxCells) {
+    if (numCells > maxCells || resolution == 2) {
+      console.log(resolution);
       document.getElementById('higherResolution').classList.add('disabled');
       document.getElementById('lowerResolution').classList.remove('disabled');
     } else if (numCells < minCells) {
@@ -218,7 +219,7 @@ function addEventHandlers() {
       set2D();
     }
 
-    if (numCells > maxCells) {
+    if (numCells > maxCells || resolution == 2) {
       this.classList.add('disabled');
     }
   };
