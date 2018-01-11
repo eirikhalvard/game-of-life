@@ -1,0 +1,6 @@
+#N Floodgate
+#C A period-2 constellation of four blinkers and four boats.
+#C http://conwaylife.com/wiki/Floodgate
+x = 16, y = 16, rule = B3/S23
+4bo$3bobo$3b2o$b2o5b3o$obo$bo10bo$12bo$12bo$3bo$3bo$3bo10bo$13bobo$5b
+3o5b2o$11b2o$10bobo$11bo!

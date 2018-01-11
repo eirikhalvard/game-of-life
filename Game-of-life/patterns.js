@@ -116,5 +116,31 @@ let patterns = [
     y: 11,
     enc:
       'bo2bo15b$o19b$o3bo15b$4o9b2o5b$6b3o5b2o4b$6b2ob2o6b3o$6b3o5b2o4b$4o9b2o5b$o3bo15b$o19b$bo2bo!'
+  },
+  {
+    name: 'Dragon flotillae',
+    x: 62,
+    y: 30,
+    enc:
+      '28b3o4b3o24b$4b3o4b3o14b3o4b3o10b3o4b3o4b$4b3o4b3o34b3o4b3o4b3$27b5o2b5o23b$3b5o2b5o16bo2bo12b5o2b5o3b$7bo2bo18bo2b2o2bo14bo2bo7b$5bo2b2o2bo15b2o6b2o11bo2b2o2bo5b$4b2o6b2o13bo10bo9b2o6b2o4b$3bo10bo11bo12bo7bo10bo3b$2bo12bo30bo12bo2b$24b3o12b3o20b$3o12b3o3bo3b3o10b3o3b3o12b3o$b3o10b3o3b2o5bo10bo6b3o10b3ob$3bo10bo5b2o5b3o6b3o8bo10bo3b$3b3o6b3o5bo9bo4bo11b3o6b3o3b$6bo4bo16bo8bo12bo4bo6b$4bo8bo13bo2bo4bo2bo9bo8bo4b$' +
+      '3bo2bo4bo2bo11bo2bo6bo2bo7bo2bo4bo2bo3b$2bo2bo6bo2bo16b2o8b2o2bo2bo6bo2bo2b$8b2o16bo2bobo2bobo2bobo10b2o8b$2bo2bobo2bobo2bo16b2o10bobo2bobo2bobo2bo2b$8b2o17b3o6b3o3b2o8b2o8b$3b3o6b3o13bo8bo9b3o6b3o3b$4bo8bo14bo8bo10bo8bo4b$4bo8bo12bo3bo4bo3bo8bo8bo4b$2bo3bo4bo3bo10bo3bo4bo3bo6bo3bo4bo3bo2b$2bo3bo4bo3bo9bo2bo2bo2bo2bo2bo5bo3bo4bo3bo2b$bo2bo2bo2bo2bo2bo28bo2bo2bo2bo2bo2bo!'
+  },
+  {
+    name: 'Spaghetti monster',
+    x: 27,
+    y: 137,
+    enc:
+      '8b3o5b3o$8bobo5bobo$8bobo5bobo$6bob2o3bo3b2obo$6b2o4bobo4b2o$10b2obob2o$9bo7bo$9bobo3bobo$5b5o7b5o$4bo2bo11bo2bo$5bob3o7b3obo$7bob2o5b2obo$6b2obobo3bobob2o$6b3obo5bob3o2$10b2o3b2o$12bobo$9bo7bo$9b2o5b2o$6b2o11b2o$4bob2o11b2obo$4b2o2b2o7b2o2b2o$4bo2bo2bo5bo2bo2bo$5bo4bo5bo4bo$5bo2bo2bo3bo2bo2bo$2bo5bo9bo5bo$3bobo15bobo$7bo11bo$3bo3bobo7bobo3bo$' +
+      '3bo2bo3bo5bo3bo2bo$4b2o2b2o7b2o2b2o$8bo9bo2$8b5ob5o$bo6b2ob2ob2ob2o6bo$3o7bo5bo7b3o$o2b2o5bo5bo5b2o2bo$2bo3b5o5b5o3bo$7bob2o5b2obo$bo3bo15bo3bo$bob2o2bo11bo2b2obo$bob4o13b4obo$4bo17bo2$2bo21bo$bobo19bobo$o25bo$o3bo17bo3bo$5bo15bo$2o23b2o$2bo3bo2bo7bo2bo3bo$2bo3bobobo5bobobo3bo$2bo5bob2o3b2obo5bo$2bo3b2obo7bob2o3bo$6b2o11b2o$4bo17bo$3bo19bo$3bo4bo9bo4bo$2b2o3b2o9b2o3b2o$2b2o3bobo7bobo3b2o$2b2o3b2o3b3o3b2o3b2o$2b3o2b3obo3bob3o2b3o$6bob2obo3bob2obo$2b2o3b2obo5bob2o3b2o$3bob2o3bobobobo3b2o' +
+      'bo$11bobobo$8bo9bo$8b3o5b3o$10b2obob2o$10b7o$8b3o5b3o$7b2obobobobob2o$6bo3bo5bo3bo$11b2ob2o$5bo2bobobobobobo2bo$6b4o7b4o$9bo7bo$9bo7bo$6b2obo2bobo2bob2o2$9b2o5b2o3$9bo7bo$9b3o3b3o$8bo2bo3bo2bo$9bo7bo$8bo2bo3bo2bo$11b2ob2o$12bobo$10bobobobo$9bo3bo3bo$9bo7bo$12bobo$7b2obo5bob2o$7b2o2bo3bo2b2o$7bo11bo$8bo9bo$6bobo9bobo$5b4o9b4o$5b2obobo5bobob2o$4bo2bo11bo2bo$9bobo3bobo$8b2obo3bob2o$4bo2bo3b2ob2o3bo2bo$9bo2bobo2bo$6bo2b' +
+      'ob2ob2obo2bo$7bobobobobobobo$8b2o2bobo2b2o$9bobo3bobo$10b2o3b2o$7b2o9b2o$7b3o7b3o$7bobo7bobo$5b2o2bo7bo2b2o$5b2o13b2o$11bo3bo$6bo4bo3bo4bo$6b2o3bo3bo3b2o$7bo2bo5bo2bo$7b3o7b3o$6bobo9bobo$6b2o11b2o$6bobo4bo4bobo$6b2o4b3o4b2o$6b2o3bo3bo3b2o$5b3o4b3o4b3o$3b2o17b2o$2bo5b2o2bobo2b2o5bo2$2bo2bob3ob2ob2ob3obo2bo$8b3o5b3o$10b3ob3o$5bo4b2obob2o4bo$11bo3bo2$11b2ob2o!'
+  },
+  {
+    name: 'Seal tagalong',
+    x: 55,
+    y: 55,
+    enc:
+      '2b2o$b3ob3o$3bo3b2o$2ob2o2bo2bobo$o6bob4o$6b2obo2bo$o4b2o3bob2o$2o8bobo2bo$o2b5ob3o4bo$bo9bo4bo$b2obo2bo3bo3bo$2bo9b2o$9b2o2b2o4bo$2bo3b2obo4b3o2bo$3b2obob5o5bob2o$7b2ob2ob2ob2o2b3o$17bobo4bo$8b2o4bobo3b6o$13bo7b2o$13bo3bo$13bo4bo3b3o6bo$14b5o3b2ob2o2b2ob2o$17b2obo2bob2o2bo$16b2o' +
+      '5bo4bo2b3o$15b3obobobobo$22bo2bo$18bobo9bo3bo$19bo8b6obo$26b2o3b4obo$21b3o5bo4bo3bo$21b3o2b3o6bo3bo$26bo9b2ob2o$20b2o13b2o2bo2b2o$20b2o3bo8bobo4bo2bo$21bo3bobo5bo$26b3o4bobo5bob2o$28b3o2b2o9bo$32b2o5bobo2b2o$29b2obo4b2obobob2o$30bob2o3bob2o4bo$37bobo$37b2obo2b2o$31bo3bo3b3o3bo$31b2o2bo2bo4bo2bo$35b2o5bo5b3o$37bo4b5obo$38bo2b2o2bo5bo$49bob2o$44bo4bo$44bo5b2ob2o$43bo2b2o$44b3o$46bob2o$48bo$47bo!'
   }
 ];

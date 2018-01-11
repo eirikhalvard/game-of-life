@@ -1,0 +1,9 @@
+#N copperhead_synth.rle
+#O gmc_nxtman
+#C Copperhead synthesis from 14 gliders
+#C http://conwaylife.com/forums/viewtopic.php?p=46308#p46308
+#C http://conwaylife.com/wiki/Copperhead
+x = 48, y = 37, rule = B3/S23
+3bo40bo$4bo38bo$2b3o19bo18b3o$23b2o$23bobo2$12b3o6b2o$14bo5bobo$13bo8b
+o13b2o$36bobo$36bo13$23b2o$23b2o2$3b2o38b2o$2bobo38bobo$4bo38bo4$7bo
+32bo$7b2o30b2o$3o3bobo30bobo3b3o$2bo42bo$bo44bo!
