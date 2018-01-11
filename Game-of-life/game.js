@@ -384,7 +384,7 @@ function createGrid(width, height) {
 function randomizeGrid() {
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
-      generation[i][j] = new Square(i, j, floor(random(2)));
+      generation[i][j] = new Square(i, j, Math.random() >= 0.5);
     }
   }
 }
@@ -396,8 +396,8 @@ function findStartLocation(patternWidth, patternHeight) {
 function fillGrid(locations, start) {
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
-      generation[i][j].value = 0;
-      generation[i][j].nextValue = 0;
+      generation[i][j].value = false;
+      generation[i][j].nextValue = false;
     }
   }
 
@@ -503,11 +503,11 @@ function createNextGeneration(gen) {
   for (let i = 0; i < gen.length; i++) {
     for (let j = 0; j < gen[i].length; j++) {
       let neighbours = countNeighbours(gen, i, j);
-      if (gen[i][j].value == 1 && (neighbours < 2 || neighbours > 3)) {
-        gen[i][j].nextValue = 0;
+      if (gen[i][j].value && (neighbours < 2 || neighbours > 3)) {
+        gen[i][j].nextValue = false;
         deathCount++;
-      } else if (gen[i][j].value == 0 && neighbours == 3) {
-        gen[i][j].nextValue = 1;
+      } else if (!gen[i][j].value && neighbours == 3) {
+        gen[i][j].nextValue = true;
       }
     }
   }
@@ -536,10 +536,10 @@ function countNeighbours(arr, x, y) {
     for (let j = -1; j < 2; j++) {
       let xValue = (x + i + arr.length) % arr.length;
       let yValue = (y + j + arr[0].length) % arr[0].length;
-      count += arr[xValue][yValue].value;
+      if (arr[xValue][yValue].value) count++;
     }
   }
-  count -= arr[x][y].value;
+  if (arr[x][y].value) count--;
   return count;
 }
 
