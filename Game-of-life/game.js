@@ -3,10 +3,10 @@ const canvasWidth = 1024;
 const canvasHeight = 256;
 const smallScreen = 600;
 const cameraZoom = 80;
-let resolution = 16;
+let resolution = 8;
 let winWidth, winHeight, width, height, numCells;
 let resolution2D, resolution3D;
-const maxCells = 7000;
+const maxCells = 100000;
 const minCells = 64;
 const resolutionMultiplier2D = 1.3;
 let fps, timeInterval, updateTime;
@@ -14,6 +14,7 @@ let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
 let deathColor, aliveColor, strokeColor;
 let generation;
+let changeList;
 let id;
 let is3D;
 
@@ -158,7 +159,6 @@ function setup() {
   updateTime = 0;
 
   setResolution();
-  resolution = resolution3D;
   setSize3D();
 
   createCanvas(width * resolution, height * resolution);
@@ -196,7 +196,7 @@ function addEventHandlers() {
     } else {
       set2D();
     }
-    if (numCells > maxCells) {
+      if (numCells > maxCells) {
       document.getElementById('higherResolution').classList.add('disabled');
       document.getElementById('lowerResolution').classList.remove('disabled');
     } else if (numCells < minCells) {
@@ -245,20 +245,7 @@ function addEventHandlers() {
 function setResolution() {
   resolution3D = resolution;
   resolution2D = resolution;
-
-  let min = 500;
-  let max = 2000;
   setSize2D();
-
-  while (numCells < min) {
-    resolution2D *= 2;
-    setSize2D();
-  }
-
-  while (numCells > max) {
-    resolution2D /= 2;
-    setSize2D();
-  }
 }
 function init() {
   scene = new THREE.Scene();
@@ -343,25 +330,12 @@ function setSize2D() {
   width = floor(winWidth / resolution);
   height = floor(winHeight / resolution);
   numCells = width * height;
-  if (verbos) {
-    console.log(
-      `2D-sizes:\n  canvasWidth: ${winWidth}\n  canvasHeight: ${winHeight}\n  width: ${width}\n  height: ${height}\n  area: ${winWidth *
-        winHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
-    );
-  }
   setDisabledButtons();
 }
 function setSize3D() {
   width = floor(canvasWidth / resolution);
   height = floor(canvasHeight / resolution);
   numCells = width * height;
-
-  if (verbos) {
-    console.log(
-      `3D-sizes:\n  canvasWidth: ${canvasWidth}\n  canvasHeight: ${canvasHeight}\n  width: ${width}\n  height: ${height}\n  area: ${canvasWidth *
-        canvasHeight}\n  Cells: ${width * height}\n  Resolution: ${resolution}`
-    );
-  }
   setDisabledButtons();
 }
 
@@ -371,7 +345,6 @@ class Square {
     this.x = x;
     this.y = y;
     this.value = value;
-    this.nextValue = value;
   }
 }
 function createGrid(width, height) {
@@ -397,7 +370,6 @@ function fillGrid(locations, start) {
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
       generation[i][j].value = false;
-      generation[i][j].nextValue = false;
     }
   }
 
@@ -410,9 +382,6 @@ function fillGrid(locations, start) {
     }
 
     generation[start.x + locations[i][0]][start.y + locations[i][1]].value = 1;
-    generation[start.x + locations[i][0]][
-      start.y + locations[i][1]
-    ].nextValue = 1;
   }
 }
 function runLengthDecoder(rle) {
@@ -458,6 +427,7 @@ function makePattern(pattern) {
   let start = findStartLocation(pattern.x, pattern.y);
   let locations = runLengthDecoder(pattern.enc);
   fillGrid(locations, start);
+  renderCanvas();
 }
 function initPatternButtons() {
   let playBody = document.getElementById('playBody');
@@ -496,36 +466,40 @@ function setDisabledButtons() {
 // ADVANCE TO NEXT GENERATION
 function advanceGeneration() {
   createNextGeneration(generation);
-  renderCanvas();
+  renderNextGen();
 }
 function createNextGeneration(gen) {
-  // Create next generation by filling nextValue
+  // check changes and fill changeList with squares.
+  changeList = [];
   for (let i = 0; i < gen.length; i++) {
     for (let j = 0; j < gen[i].length; j++) {
       let neighbours = countNeighbours(gen, i, j);
       if (gen[i][j].value && (neighbours < 2 || neighbours > 3)) {
-        gen[i][j].nextValue = false;
+        changeList.push(gen[i][j]);
         deathCount++;
       } else if (!gen[i][j].value && neighbours == 3) {
-        gen[i][j].nextValue = true;
+        changeList.push(gen[i][j]);
       }
     }
   }
 
-  // set value to nextValue and advance one generation
-  for (let i = 0; i < gen.length; i++) {
-    for (let j = 0; j < gen[i].length; j++) {
-      gen[i][j].value = gen[i][j].nextValue;
-    }
+  // toggle the value of the changeList squares
+  for (let i = 0; i < changeList.length; i++) {
+    changeList[i].value = !changeList[i].value;
+  }
+}
+function renderNextGen() {
+  stroke(colors[colorId].stroke);
+  for (let i = 0; i < changeList.length; i++) {
+    fill( changeList[i].value ? colors[colorId].alive : colors[colorId].death );
+    rect(changeList[i].x * resolution, changeList[i].y * resolution, resolution, resolution);
   }
 }
 function renderCanvas() {
   stroke(colors[colorId].stroke);
   for (let i = 0; i < generation.length; i++) {
-    for (let j = 0; j < generation[i].length; j++) {
-      fill(
-        generation[i][j].value ? colors[colorId].alive : colors[colorId].death
-      );
+    for (let j = 0; j < generation[0].length; j++) {
+      fill( generation[i][j].value ? colors[colorId].alive : colors[colorId].death );
       rect(i * resolution, j * resolution, resolution, resolution);
     }
   }
@@ -634,6 +608,7 @@ function makeColorSection() {
     box.classList.add('z-depth-1');
     box.onclick = function() {
       setColor(i);
+      renderCanvas();
     };
     box.style.border = `2px solid rgb(${colors[i].stroke.levels[0]}, ${
       colors[i].stroke.levels[1]
