@@ -9,7 +9,7 @@ let resolution2D, resolution3D;
 const maxCells = 100000;
 const minCells = 64;
 const resolutionMultiplier2D = 1.3;
-let fps, timeInterval, updateTime;
+let fps, timeInterval, updateTime, rotationSpeed;
 let canvas, scene, camera, renderer, texture, geometry, material, torus;
 let genCount, deathCount, genCountDom, deathCountDom, deathPerGenDom;
 let deathColor, aliveColor, strokeColor;
@@ -17,6 +17,7 @@ let generation;
 let changeList;
 let id;
 let is3D;
+let calculationsPerFrame;
 
 let colorContainer;
 let colors;
@@ -42,6 +43,8 @@ function setup() {
   noLoop();
   is3D = true;
   fps = document.getElementById('fps-range').value;
+  calculationsPerFrame = document.getElementById('calc-range').value;
+  rotationSpeed = document.getElementById('rotation-input').value;
   timeInterval = 1000 / fps;
   updateTime = 0;
 
@@ -74,6 +77,14 @@ function addEventHandlers() {
   document.getElementById('fps-range').oninput = function() {
     fps = this.value;
     timeInterval = 1000 / fps;
+  };
+
+  document.getElementById('calc-range').oninput = function() {
+    calculationsPerFrame = this.value;
+  };
+
+  document.getElementById('rotation-input').oninput = function() {
+    rotationSpeed = this.value;
   };
 
   document.getElementById('dimensionInput').onchange = function() {
@@ -165,21 +176,25 @@ function init() {
 function animate() {
   if (is3D) {
     if (updateTime + timeInterval < millis()) {
-      advanceGeneration();
-      updateStats();
+      for (let i = 0; i < calculationsPerFrame; i++) {
+        advanceGeneration();
+        updateStats();
+      }
       updateTime = millis();
     }
     id = requestAnimationFrame(animate);
     texture.needsUpdate = true;
-    torus.rotation.x += 0.01;
-    torus.rotation.y += 0.01;
+    torus.rotation.x += 0.0002 * rotationSpeed;
+    torus.rotation.y += 0.0002 * rotationSpeed;
     renderer.render(scene, camera);
   }
 }
 function draw() {
   if (updateTime + timeInterval < millis()) {
-    advanceGeneration();
-    updateStats();
+    for (let i = 0; i < calculationsPerFrame; i++) {
+      advanceGeneration();
+      updateStats();
+    }
     updateTime = millis();
   }
 }

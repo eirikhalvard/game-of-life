@@ -100,8 +100,8 @@ let patterns = [
     x: 55,
     y: 79,
     enc:
-    '49b2o$49b2o2$23b2o5b2o$23b2o5b2o5$43bo5bo$42b3o3b3o$41b2obo3bob2o3$23bo7bo12bo3bo$22bo2bo3bo2bo11bo3bo$26bobo$26bobo$26bobo$22bo2bo3bo2bo$23b3o3b3o7$43bo$43bobo$43b2o$30b2o$30b2o2$10b2o$8b2ob2o8bobo$8bo2bo10b' +
-    'o$8bo2bo$9b2o33b2obo3bob2o$32bo11bo2bo3bo2bo$9b2o20bo13b3o3b3o$8bo2bo19b3o$2o6bo2bo$2o6b2ob2o$10b2o9bobo$21b2o$22bo2$45b2o$45b2o2$20bo$20bobo$20b2o2$25b2o$25b2o$6b4o15b2o$4b2o4b2o13bo$4b2o5bo12bobo$6b2obobo12bob2o$11bo$7bo3bo$7bo4bo12b2o$9b3o3bo9b2o$9b2o4bo$15b2o$17bo$17b3o3$20bo$19bob5o$18b2o5bo$18b2o3bo2bo$26bo$20b2obo2bo$23bo2bo$24b2o$24b2o!'
+      '49b2o$49b2o2$23b2o5b2o$23b2o5b2o5$43bo5bo$42b3o3b3o$41b2obo3bob2o3$23bo7bo12bo3bo$22bo2bo3bo2bo11bo3bo$26bobo$26bobo$26bobo$22bo2bo3bo2bo$23b3o3b3o7$43bo$43bobo$43b2o$30b2o$30b2o2$10b2o$8b2ob2o8bobo$8bo2bo10b' +
+      'o$8bo2bo$9b2o33b2obo3bob2o$32bo11bo2bo3bo2bo$9b2o20bo13b3o3b3o$8bo2bo19b3o$2o6bo2bo$2o6b2ob2o$10b2o9bobo$21b2o$22bo2$45b2o$45b2o2$20bo$20bobo$20b2o2$25b2o$25b2o$6b4o15b2o$4b2o4b2o13bo$4b2o5bo12bobo$6b2obobo12bob2o$11bo$7bo3bo$7bo4bo12b2o$9b3o3bo9b2o$9b2o4bo$15b2o$17bo$17b3o3$20bo$19bob5o$18b2o5bo$18b2o3bo2bo$26bo$20b2obo2bo$23bo2bo$24b2o$24b2o!'
   },
   {
     name: 'Pi portraitor',
@@ -109,5 +109,12 @@ let patterns = [
     y: 24,
     enc:
       '11b2o11b$6b2obo4bob2o6b$6bo10bo6b$7b2o6b2o7b$4b3o2b6o2b3o4b$4bo2bo8bo2bo4b$b2obobo10bobob2ob$bobobo12bobobob$3bo16bo3b$bo2bo14bo2bob$4bo7b3o4bo4b$o3bo7bobo4bo3bo$o3bo7bobo4bo3bo$4bo14bo4b$bo2bo14bo2bob$3bo16bo3b$bobobo12bobobob$b2obobo10bobob2ob$4bo2bo8bo2bo4b$4b3o2b6o2b3o4b$7b2o6b2o7b$6bo10bo6b$6b2obo4bob2o6b$11b2o!'
+  },
+  {
+    name: 'Schick engine',
+    x: 20,
+    y: 11,
+    enc:
+      'bo2bo15b$o19b$o3bo15b$4o9b2o5b$6b3o5b2o4b$6b2ob2o6b3o$6b3o5b2o4b$4o9b2o5b$o3bo15b$o19b$bo2bo!'
   }
 ];

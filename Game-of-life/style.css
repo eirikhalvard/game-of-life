@@ -1,4 +1,6 @@
-#fps-range {
+#fps-range,
+#calc-range,
+#rotation-input {
   border: none;
 }
 
