@@ -84,7 +84,7 @@ function addEventHandlers() {
   };
 
   document.getElementById('rotation-input').oninput = function() {
-    rotationSpeed = this.value;
+    rotationSpeed = this.value * 1.3;
   };
 
   document.getElementById('dimensionInput').onchange = function() {
@@ -269,22 +269,20 @@ function findStartLocation(patternWidth, patternHeight) {
   let startY = floor((height - patternHeight) / 2);
   return { x: startX, y: startY };
 }
-function fillGrid(locations, start) {
+function resetGrid() {
   for (let i = 0; i < generation.length; i++) {
     for (let j = 0; j < generation[i].length; j++) {
       generation[i][j].value = false;
     }
   }
+}
+function fillGrid(locations, start) {
+  resetGrid();
 
   for (let i = 0; i < locations.length; i++) {
-    if (verbos) {
-      console.log(
-        `-------\n  x: ${start.x + locations[i][0]}\n  y: ${start.y +
-          locations[i][1]}`
-      );
-    }
-
-    generation[start.x + locations[i][0]][start.y + locations[i][1]].value = 1;
+    let x = start.x + locations[i][0];
+    let y = start.y + locations[i][1];
+    generation[x][y].value = 1;
   }
 }
 function runLengthDecoder(rle) {
@@ -504,4 +502,13 @@ function setColor(id) {
   colorId = id;
   // colorContainer.childNodes[colorId].classList.remove('z-depth-1');
   colorContainer.childNodes[colorId].classList.add('z-depth-3');
+}
+
+function keyPressed() {
+  if (key === 'R') {
+    resetStats();
+    randomizeGrid();
+  } else {
+    console.log(key);
+  }
 }
